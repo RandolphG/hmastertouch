@@ -1,0 +1,43 @@
+.score {
+  box-sizing: border-box;
+  border: #676767 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  color: white;
+
+  &_container {
+    box-sizing: border-box;
+    border: #e73c7e 1px solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    width: 90%;
+
+    &_max {
+      position: relative;
+      border: #0086e4 7px solid;
+      height: 90%;
+      width: 90%;
+      max-width: 900px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+
+      &_info {
+        font-size: 1.3rem;
+        width: 100%;
+        padding: 0 2rem;
+        border: #e73c7e 2px solid;
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
+}
