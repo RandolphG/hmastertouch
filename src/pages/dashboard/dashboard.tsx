@@ -8,7 +8,7 @@ import "./styles/_dashboardStyles.scss";
  * @description Dashboard page
  */
 const Dashboard = () => {
-  const { system, motionSettings, info, buttons } = DashboardViewModel();
+  const { info, buttons } = DashboardViewModel();
 
   const Info = () => (
     <div className="dashboard_container_max_info">
@@ -34,19 +34,12 @@ const Dashboard = () => {
     </div>
   );
 
-  const Author = () => (
-    <div {...motionSettings} className="dashboard_container_max_author">
-      {system.quote.author}
-    </div>
-  );
-
   return (
     <motion.div className="dashboard">
       <div className="dashboard_container">
         <div className="dashboard_container_max">
-          <Info />
           <Buttons />
-          <Author />
+          <Info />
           <Outlet />
         </div>
       </div>

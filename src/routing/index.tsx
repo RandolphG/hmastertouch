@@ -13,13 +13,15 @@ let index: RouteObject[] = [
     ],
   },
   {
-    path: "scores",
-    element: <Scores />,
-  },
-  {
     path: "dashboard",
     element: <Dashboard />,
-    children: [{ index: true, element: <Game /> }],
+    children: [
+      { index: true, element: <Game /> },
+      {
+        path: "dashboard/scores",
+        element: <Scores />,
+      },
+    ],
   },
 ];
 

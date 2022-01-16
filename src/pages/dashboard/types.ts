@@ -1,1 +1,4 @@
-export type buttons = { title: string; onClick: () => void }[];
+export type buttons = {
+  title: string;
+  onClick: (url?: string) => any;
+}[];

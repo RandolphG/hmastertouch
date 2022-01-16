@@ -13,22 +13,13 @@
     border: #e73c7e 1px solid;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    //justify-content: center;
     align-items: center;
     height: 90%;
-    width: 90%;
-
-    &_max {
-      position: relative;
-      border: #0086e4 7px solid;
-      height: 90%;
-      width: 90%;
-      max-width: 900px;
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
+    width: 100%;
+    max-width: 900px;
+    padding: 1rem;
+    justify-content: flex-start;
 
       &_info {
         font-size: 1.3rem;
@@ -39,5 +30,4 @@
         justify-content: center;
       }
     }
-  }
 }

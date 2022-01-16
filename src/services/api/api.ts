@@ -5,8 +5,8 @@ import {
   requestSetQuoteAction,
   requestStartTimer,
 } from "../../state-mgmt/";
+import { findUniqueLettersInString } from "../../util";
 import { data } from "./types";
-import { charset } from "../../pages";
 
 const url = process.env.REACT_APP_GET_URL;
 const postUrl = process.env.REACT_APP_POST_URL;
@@ -14,39 +14,12 @@ const postUrl = process.env.REACT_APP_POST_URL;
 export const fetchQuote = (dispatch: any) => {
   dispatch(requestStartTimer());
 
-  const charset: charset = {
-    " ": "",
-    ",": "",
-    "-": "",
-    ";": "",
-    ":": "",
-    "/": "",
-    '"': "",
-    "'": "",
-    ".": "",
-  };
-
   /* fetch quote info */
   axios
     .get(url!)
     .then(function (response) {
       const data: data = response.data;
       const { author, content, length, tags, _id } = data;
-
-      /*
-       * How to find unique characters of a string in JavaScript ?
-       * https://www.geeksforgeeks.org/how-to-find-unique-characters-of-a-string-in-javascript/
-       * */
-      function findUniqueLettersInString(quote: string) {
-        return [
-          ...quote
-            .replace(/[',-;/". ]+/g, (m) => charset[m])
-            .toLowerCase()
-            .split(""),
-        ].reduce((acc, curr) => {
-          return acc.includes(curr) ? acc : acc + curr;
-        }, "");
-      }
 
       const uniqueCharacters = findUniqueLettersInString(content);
       const uniqueCharactersLength = findUniqueLettersInString(content).length;

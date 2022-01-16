@@ -19,6 +19,17 @@ export const calculateScore: CalculateScoreProps = (
   return ((quoteLength * uniqueLetters) / (1 + errors * seconds)).toFixed();
 };
 
-export const simpleFunction = () => {
-  return "Hello World";
-};
+/*
+ * How to find unique characters of a string in JavaScript ?
+ * https://www.geeksforgeeks.org/how-to-find-unique-characters-of-a-string-in-javascript/
+ * */
+export function findUniqueLettersInString(quote: string) {
+  return [
+    ...quote
+      .replace(/[',-;/". ]+/g, "")
+      .toLowerCase()
+      .split(""),
+  ].reduce((acc, curr) => {
+    return acc.includes(curr) ? acc : acc + curr;
+  }, "");
+}

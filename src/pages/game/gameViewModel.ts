@@ -21,6 +21,20 @@ export const GameViewModel = () => {
   const system = useSelector(selectSystemState);
   const dispatch = useDispatch();
 
+  const motionSettings = {
+    initial: {
+      x: 50,
+      opacity: 0,
+    },
+    animate: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: {
+      opacity: 0,
+    },
+  };
+
   const handleSelectLetter = ({
     letter,
     word,
@@ -79,5 +93,6 @@ export const GameViewModel = () => {
     requestResetGameAction,
     dispatch,
     navigate,
+    motionSettings,
   };
 };

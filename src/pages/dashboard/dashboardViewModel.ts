@@ -9,8 +9,8 @@ export const DashboardViewModel = () => {
   const system = useSelector(selectSystemState);
   const dispatch = useDispatch();
 
-  function navigateToHighScores() {
-    navigate("/scores");
+  function navigateTo(url: string) {
+    navigate(url);
   }
 
   function reset() {
@@ -23,20 +23,6 @@ export const DashboardViewModel = () => {
     dispatch(requestResetGameAction());
   }
 
-  const motionSettings = {
-    initial: {
-      x: 50,
-      opacity: 0,
-    },
-    animate: {
-      x: 0,
-      opacity: 1,
-    },
-    exit: {
-      opacity: 0,
-    },
-  };
-
   const info: any = [
     { title: `User Name`, value: system.userName, style: "userName" },
     { title: `Correct`, value: system.correct, style: "userName" },
@@ -44,15 +30,15 @@ export const DashboardViewModel = () => {
     { title: `Errors`, value: system.errors, style: "errors" },
   ];
 
-  const buttons: buttons = [
+  const buttons = [
     { title: `Home`, onClick: reset },
-    { title: `High Scores`, onClick: navigateToHighScores },
+    { title: `Game`, onClick: () => navigateTo("") },
+    { title: `High Scores`, onClick: () => navigateTo("dashboard/scores") },
     { title: `New Quote`, onClick: newQuote },
   ];
 
   return {
     info,
-    motionSettings,
     system,
     navigate,
     buttons,

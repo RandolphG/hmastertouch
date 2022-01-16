@@ -1,3 +1,5 @@
+@import "src/theme/style";
+
 @keyframes rotate {
   100% {
     transform: rotate(360deg);
@@ -52,6 +54,43 @@
   }
 }
 
+.results {
+  position: absolute;
+  width: 100%;
+  height: 98%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &_container {
+    font-size: 1.5rem;
+    border: purple 3px solid;
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .details {
+    font-size: 1.7rem;
+  }
+
+  .modalButton {
+    font-family: $font-main;
+    font-size: 1.5rem;
+    border: red 3px solid;
+    width: 100%;
+    height: 20%;
+  }
+
+  &_closeButton {
+    border: red 3px solid;
+    width: 100%;
+    height: 20%;
+  }
+}
 
 .hang-man-game {
   border: #0086e4 2px solid;
@@ -59,6 +98,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+
 
   .word-board {
     border: #0086e4 2px solid;
@@ -76,6 +116,20 @@
     font-size: 24px;
     flex-basis: 24px;
     transition: all 1.5s ease-in-out;
+  }
+
+  .footer {
+    display: flex;
+    flex-direction: column;
+    border: solid green 2px;
+  }
+
+  .author {
+    border: #ee7752 2px solid;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    padding-right: 1rem;
+    text-align: right;
   }
 
   .letter-board {

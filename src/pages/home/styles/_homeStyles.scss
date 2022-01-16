@@ -3,7 +3,7 @@
 .home {
   font-family: $font-main;
   box-sizing: border-box;
-  border: #ee7752 1px solid;
+  //border: #ee7752 1px solid;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,7 +24,7 @@
     &_max {
       position: relative;
       overflow: hidden;
-      border: purple 7px solid;
+      //border: purple 7px solid;
       height: 100%;
       width: 80%;
       max-width: 500px;
@@ -40,7 +40,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        border: lightgreen 6px solid;
+        //border: lightgreen 6px solid;
         border-radius: .5rem;
       }
 
@@ -56,7 +56,7 @@
           font-size: 1.5rem;
           border-radius: .25rem;
           padding: 1rem;
-          background: white;
+          //background: white;
           color: grey;
         }
       }
