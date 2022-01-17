@@ -1,3 +1,70 @@
+$bg: black;
+$bg-victory: rgb(16, 144, 94);
+$bg-defeat: rgb(142, 16, 16);
+
+$color-primary: #4488ff;
+$color-secondary: #d73739;
+$color-text-primary: rgb(255, 255, 255);
+$color-text-secondary: rgb(255, 255, 255);
+
+$breakpoint: 48em;
+
+$font-primary: "PT Mono", monospace;
+$font-secondary: "Manrope", sans-serif;
+$fontWeight-normal: 400;
+$fontWeight-bold: 700;
+
+$borderColor: rgb(255, 255, 255);
+$borderColor-hover: rgb(255, 255, 255);
+
+$outlineWidth: .25rem;
+$outlineOffset: .25em;
+$outlineColor: $color-primary;
+
+$controlHeight: 3em;
+$controlFontSize: 1rem;
+$controlLineHeight: 1.25;
+$controlLineBox: $controlFontSize * $controlLineHeight;
+$controlBorderWidth: .063em;
+$controlBorderColor: $borderColor;
+
+$layoutPadding: 1rem;
+$layoutPadding-large: 3.5rem;
+
+$screenAnimationDuration: .5s;
+
+
+.board__content {
+  position: relative;
+  display: flex;
+  overflow: hidden auto;
+}
+
+.board__content-item {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  padding: 0 $layoutPadding;
+  transition-property: visibility, opacity, transform;
+  transition-duration: .5s;
+  transition-timing-function: ease;
+
+  @media (min-width: $breakpoint) {
+    padding: 0 $layoutPadding-large;
+  }
+}
+
+.board__content-leaderboard {
+
+  // screen state
+  .board--login & {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
 .score {
   box-sizing: border-box;
   border: #676767 1px solid;
@@ -21,13 +88,53 @@
     padding: 1rem;
     justify-content: flex-start;
 
-      &_info {
-        font-size: 1.3rem;
-        width: 100%;
-        padding: 0 2rem;
-        border: #e73c7e 2px solid;
-        display: flex;
-        justify-content: center;
-      }
+    &_info {
+      font-size: 1.3rem;
+      width: 100%;
+      padding: 0 2rem;
+      border: #e73c7e 2px solid;
+      display: flex;
+      justify-content: center;
     }
+  }
+}
+
+.leaderboard {
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+
+  tbody tr:not(:first-child) {
+    border-top: .125rem solid $borderColor;
+  }
+
+  th {
+    color: $color-text-secondary;
+    font-weight: $fontWeight-normal;
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: left;
+
+    &:nth-child(1) {
+      width: 6rem;
+    }
+
+    &:nth-child(3),
+    &:nth-child(4) {
+      width: 15%;
+      text-align: right;
+    }
+  }
+
+  td {
+    padding: .5em 0;
+    font-weight: $fontWeight-bold;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    font-family: $font-secondary;
+
+    &:nth-child(3),
+    &:nth-child(4) {
+      text-align: right;
+    }
+  }
 }

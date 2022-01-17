@@ -22,6 +22,8 @@ export const {
   requestStartTimer,
   requestSetHighScores,
   requestSetButtonId,
+  requestShowModalAction,
+  requestTimerOnTick,
 } = systemSlice.actions;
 
 export default systemSlice.reducer;

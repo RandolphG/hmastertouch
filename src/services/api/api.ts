@@ -12,7 +12,7 @@ const url = process.env.REACT_APP_GET_URL;
 const postUrl = process.env.REACT_APP_POST_URL;
 
 export const fetchQuote = (dispatch: any) => {
-  dispatch(requestStartTimer());
+  dispatch(requestStartTimer(undefined));
 
   /* fetch quote info */
   axios

@@ -1,0 +1,61 @@
+@import "src/theme/style";
+
+.results {
+  position: absolute;
+  width: 100%;
+  height: 98%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &_container {
+    color: white;
+    border: green 3px solid;
+    width: 70%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &_modalTitle {
+      font-size: 1.5rem;
+      border: purple 3px solid;
+      width: 100%;
+      height: 15%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &_details{
+      border: red 3px solid;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      font-size: 1.7rem;
+
+      padding: 2rem;
+    }
+
+    &_modalButton {
+      font-family: $font-main;
+      font-size: 1.5rem;
+      border: red 3px solid;
+      width: 100%;
+      height: 20%;
+      z-index: 100;
+    }
+  }
+
+
+
+  &_closeButton {
+    border: red 3px solid;
+    width: 100%;
+    height: 20%;
+  }
+}

@@ -7,21 +7,7 @@ import "./styles/_signinStyles.scss";
  * SignIn
  **/
 const SignIn: FC = memo(() => {
-  const { handleChange, playerInfo } = SigninViewModel();
-
-  const motionSettings = {
-    initial: {
-      x: 50,
-      opacity: 0,
-    },
-    animate: {
-      x: 0,
-      opacity: 1,
-    },
-    exit: {
-      opacity: 0,
-    },
-  };
+  const { handleChange, playerInfo, motionSettings } = SigninViewModel();
 
   return (
     <motion.div {...motionSettings} className="signin" key="signIn">

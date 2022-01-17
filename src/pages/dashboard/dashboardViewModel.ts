@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchQuote } from "../../services";
 import { requestResetGameAction, selectSystemState } from "../../state-mgmt";
-import { buttons } from "./types";
 
 export const DashboardViewModel = () => {
   let navigate = useNavigate();
@@ -15,12 +14,12 @@ export const DashboardViewModel = () => {
 
   function reset() {
     navigate("/");
-    dispatch(requestResetGameAction());
+    dispatch(requestResetGameAction(""));
   }
 
   function newQuote() {
     fetchQuote(dispatch);
-    dispatch(requestResetGameAction());
+    dispatch(requestResetGameAction(""));
   }
 
   const info: any = [

@@ -11,6 +11,7 @@ export interface ISystemState {
   timer: ITimer;
   highScores: any[];
   buttonId: number;
+  showModal: boolean;
 }
 
 export interface IPlayerCredentials {
@@ -29,6 +30,7 @@ export interface IQuoteInfo {
 
 export interface ITimer {
   startTime: number;
+  elapsedTime: number;
   endTime: number;
   running: boolean;
   duration: number;

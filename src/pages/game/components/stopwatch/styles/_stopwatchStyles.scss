@@ -1,0 +1,32 @@
+.stopwatch-time {
+  font-size: 1.3rem;
+  width: 100%;
+  border: #e73c7e solid 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 1rem;
+
+  &_container {
+    display: flex;
+    border: #0086e4 solid 3px;
+  }
+
+  span {
+    text-align: right;
+    display: inline-block;
+  }
+
+  &__mins {
+    min-width: 2em;
+  }
+
+  &__secs {
+    min-width: 2em;
+  }
+
+  &__mils {
+    min-width: 2em;
+  }
+}

@@ -20,10 +20,12 @@ export const initialState: ISystemState = {
   },
   timer: {
     startTime: 0,
+    elapsedTime: 0,
     endTime: 0,
     running: false,
     duration: 0,
   },
   buttonId: 1,
   highScores: [],
+  showModal: false,
 };

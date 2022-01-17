@@ -7,7 +7,7 @@ import "./styles/_scoresStyles.scss";
  * Scores
  */
 const Scores = () => {
-  const { navigate, sortedHighScore } = ScoresViewModel();
+  const { sortedHighScore } = ScoresViewModel();
 
   return (
     <ErrorBoundary>
@@ -21,23 +21,31 @@ const Scores = () => {
               alignItems: "center",
             }}
           >
-            {sortedHighScore.map((score, idx) => (
-              <div
-                key={`score-${idx}`}
-                style={{
-                  marginBottom: "0.5rem",
-                  border: "solid pink 2px",
-                  width: "90%",
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
+            <div className="board__content-item board__content-leaderboard">
+              <table
+                className="board__leaderboard leaderboard"
+                aria-label="leaderboard"
               >
-                <div style={{ color: "green" }}>{score.userName}</div>
-                <div>Errors: {score.errors}</div>
-                <div>Duration: {score.duration}</div>
-                <div>Score: {score.score}</div>
-              </div>
-            ))}
+                <thead>
+                  <tr>
+                    <th>#score</th>
+                    <th>nickname</th>
+                    <th>time</th>
+                    <th>errors</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {sortedHighScore.map((score, idx) => (
+                    <tr>
+                      <td>{score.score}</td>
+                      <td>{score.userName}</td>
+                      <td>{score.duration}</td>
+                      <td>{score.errors}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

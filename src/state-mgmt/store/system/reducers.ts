@@ -1,5 +1,4 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { ChangeEvent } from "react";
 
 import { IPlayerCredentials, IQuoteInfo, ISystemState, Letter } from "./types";
 
@@ -48,7 +47,7 @@ export const reducers = {
   },
   requestIncreaseGuessesAction: (
     state: ISystemState,
-    action: PayloadAction
+    action?: PayloadAction
   ) => {
     return { ...state, guesses: state.guesses + 1 };
   },
@@ -58,7 +57,10 @@ export const reducers = {
   ) => {
     return { ...state, correct: state.correct + 1 };
   },
-  requestIncreaseErrorsAction: (state: ISystemState, action: PayloadAction) => {
+  requestIncreaseErrorsAction: (
+    state: ISystemState,
+    action?: PayloadAction
+  ) => {
     return { ...state, errors: state.errors + 1 };
   },
   requestSetSelectedLetter: (
@@ -70,7 +72,7 @@ export const reducers = {
       selectedLetters: [...state.selectedLetters, action.payload],
     };
   },
-  requestStartTimer: (state: ISystemState, action: PayloadAction) => {
+  requestStartTimer: (state: ISystemState, action?: PayloadAction) => {
     const { running } = state.timer;
     if (running) {
       console.log("its already running");
@@ -81,7 +83,21 @@ export const reducers = {
       };
     }
   },
-  requestStopTimer: (state: ISystemState, action: PayloadAction) => {
+  requestTimerOnTick: (state: ISystemState, action?: PayloadAction) => {
+    const { running, startTime, elapsedTime } = state.timer;
+
+    if (running) {
+      let now = Date.now();
+      return {
+        ...state,
+        timer: {
+          ...state.timer,
+          duration: elapsedTime + (now - startTime),
+        },
+      };
+    }
+  },
+  requestStopTimer: (state: ISystemState, action?: PayloadAction) => {
     const { running, startTime } = state.timer;
 
     if (!running) {
@@ -101,7 +117,7 @@ export const reducers = {
       };
     }
   },
-  requestResetTimer: (state: ISystemState, action: PayloadAction) => {
+  requestResetTimer: (state: ISystemState, action?: PayloadAction) => {
     return {
       ...state,
       timer: {
@@ -117,6 +133,15 @@ export const reducers = {
     return {
       ...state,
       buttonId: action.payload,
+    };
+  },
+  requestShowModalAction: (
+    state: ISystemState,
+    action: PayloadAction<boolean>
+  ) => {
+    return {
+      ...state,
+      showModal: action.payload,
     };
   },
 };

@@ -9,22 +9,7 @@ import "./styles/_homeStyles.scss";
  * Home
  */
 const Home: FC = () => {
-  const { buttonOptions, system } = HomeViewModel();
-
-  const motionSettings = {
-    initial: {
-      opacity: 0,
-    },
-    animate: {
-      opacity: 1,
-    },
-    exit: {
-      opacity: 0,
-      transition: {
-        duration: 3.5,
-      },
-    },
-  };
+  const { buttonOptions, system, motionSettings } = HomeViewModel();
 
   const Title = () => <div className="home_container_max_title" />;
 

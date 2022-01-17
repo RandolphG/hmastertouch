@@ -1,5 +1,6 @@
 import React, { FC } from "react";
-import { Letters, WordBoard } from "./components";
+import { Modal } from "../../components";
+import { CountdownTimer, Letters, Stopwatch, WordBoard } from "./components";
 import { GameViewModel } from "./gameViewModel";
 import { IGame } from "./types";
 import "./styles/_gameStyles.scss";
@@ -8,12 +9,19 @@ import "./styles/_gameStyles.scss";
  * Game
  */
 const Game: FC = () => {
-  const { system, handleSelectLetter, ErrorBoundary, motionSettings } =
-    GameViewModel();
+  const {
+    content,
+    alphabet,
+    author,
+    handleSelectLetter,
+    ErrorBoundary,
+    motionSettings,
+    selectedLetters,
+  } = GameViewModel();
 
   const Author = () => (
     <div {...motionSettings} className="author">
-      - {system.quote.author}
+      - {author}
     </div>
   );
 
@@ -23,7 +31,7 @@ const Game: FC = () => {
       <div className="footer">
         <Author />
         <Letters
-          system={system}
+          alphabet={alphabet}
           word={word}
           selectedLetters={selectedLetters}
           onLetterClick={onLetterClick}
@@ -32,65 +40,14 @@ const Game: FC = () => {
     </div>
   );
 
-  const Results = () => (
-    <div className="results">
-      <div
-        style={{
-          border: "green 3px solid",
-          width: "70%",
-          height: "50%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-        }}
-      >
-        <div
-          style={{
-            fontSize: "1.5rem",
-            border: "purple 3px solid",
-            width: "100%",
-            height: "15%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          Game Results
-        </div>
-        <div
-          style={{
-            border: "red 3px solid",
-            width: "100%",
-            height: "100%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            alignItems: "flex-start",
-            padding: "2rem",
-          }}
-        >
-          <div className="details">Score : 1999</div>
-          <div className="details">Errors : {system.errors}</div>
-          <div className="details">Guesses : {system.guesses}</div>
-        </div>
-        <button
-          className="modalButton"
-          onClick={() => {
-            console.log(`CLICKED`);
-          }}
-        >
-          Accept
-        </button>
-      </div>
-    </div>
-  );
-
   return (
     <ErrorBoundary>
-      <Results />
+      <Modal />
+      <Stopwatch />
+      <CountdownTimer />
       <GameBoard
-        word={system.quote.content}
-        selectedLetters={system.selectedLetters}
+        word={content}
+        selectedLetters={selectedLetters}
         onLetterClick={handleSelectLetter}
       />
     </ErrorBoundary>

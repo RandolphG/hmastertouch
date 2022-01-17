@@ -1,5 +1,3 @@
-import { ISystemState } from "../../state-mgmt";
-
 export interface IGame {
   word: string;
   selectedLetters: string[];
@@ -14,13 +12,19 @@ export interface IGame {
   }) => void;
 }
 
+export interface ILetter extends IGame {
+  idx: number;
+  letter: string;
+  showLetter: boolean;
+}
+
 export interface IWordBoard {
   word: string;
   selectedLetters: string[];
 }
 
 export interface ILetters {
-  system: ISystemState;
+  alphabet: string[];
   word: string;
   selectedLetters: string[];
   onLetterClick: ({

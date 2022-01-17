@@ -1,0 +1,142 @@
+/* ------ COUNTDOWN SCREEN ------ */
+$screenAnimationDuration: .5s;
+$countdown-fontSize: 6rem;
+$countdown-seconds: 5;
+$countdown-elements: $countdown-seconds + 1;
+$countdown-fadeHeight: $countdown-fontSize * .5;
+$countdown-translateZ: $countdown-fontSize * 1.25;
+$countdown-rotateAngle: (360 - (360 / $countdown-elements)) / $countdown-elements;
+$countdown-animationDelay: 1s;
+$countdown-keyframe: 100% / $countdown-elements;
+$color-primary: #4488ff;
+$bg: black;
+
+.app {
+  height: 100%;
+}
+
+.app__screen {
+  height: 100%;
+}
+
+.countdown {
+  background: rgba(0,0,0,0.8);
+  display: grid;
+  place-items: center;
+  animation: screenSlideDown $screenAnimationDuration;
+}
+
+.countdown__container {
+  $size: 36rem;
+
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  max-width: $size;
+  height: 100%;
+  max-height: $size;
+}
+
+.countdown__indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.countdown__circle {
+  $strokeWidth: .125rem;
+  cx: 50%;
+  cy: 50%;
+  r: calc(50% - #{$strokeWidth / 2});
+  fill: none;
+  stroke: rgb(255, 255, 255);
+  stroke-width: $strokeWidth;
+}
+
+.countdown__indicator-loader {
+  $strokeDash: 2000;
+
+  stroke: $color-primary;
+  stroke-dasharray: $strokeDash;
+  stroke-dashoffset: $strokeDash;
+  transform: rotate(-90deg);
+  transform-origin: 50%;
+  animation: #{$countdown-elements}s countdownIndicator linear forwards;
+
+  @keyframes countdownIndicator {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+}
+
+/* --- timer --- */
+
+.countdown-timer {
+  overflow: hidden;
+
+  &::before,
+  &::after {
+    content: "";
+    position: relative;
+    display: block;
+    z-index: 1;
+    height: $countdown-fadeHeight;
+  }
+
+  &::before {
+    background: linear-gradient(to top, rgba($bg, 0), $bg);
+  }
+
+  &::after {
+    background: linear-gradient(to bottom, rgba($bg, 0), $bg);
+  }
+}
+
+.countdown-timer__rotator {
+  position: relative;
+  width: 2ch;
+  height: $countdown-fontSize;
+  color: white;
+  font-size: $countdown-fontSize;
+  line-height: 1;
+  text-align: center;
+  transform-style: preserve-3d;
+  animation: #{$countdown-elements}s timerRotator forwards;
+
+  @keyframes timerRotator {
+    $step: $countdown-keyframe;
+    $rotateX: 0deg;
+
+    @for $i from 1 through $countdown-elements {
+      #{$step} {
+        transform: translateZ(-$countdown-translateZ) rotateX($rotateX);
+      }
+
+      $step: $step + $countdown-keyframe;
+      $rotateX: $rotateX + $countdown-rotateAngle;
+    }
+  }
+}
+
+.countdown-timer__item {
+  position: absolute;
+  width: 100%;
+  color: white;
+  backface-visibility: hidden;
+
+  $rotateX: 0deg;
+
+  @for $i from 1 through $countdown-elements {
+    &:nth-child(#{$i}) {
+      transform: rotateX(-$rotateX) translateZ($countdown-translateZ);
+    }
+
+    $rotateX: $rotateX + $countdown-rotateAngle;
+  }
+}
+
+/* ------ end: COUNTDOWN SCREEN ------ */

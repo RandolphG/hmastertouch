@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchQuote } from "../../services";
@@ -24,8 +24,7 @@ export const HomeViewModel = () => {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
     event.preventDefault();
-    dispatch(requestStartTimer());
-    fetchQuote(dispatch);
+    dispatch(requestStartTimer(undefined));
     navigate("/dashboard");
   }
 
@@ -42,5 +41,24 @@ export const HomeViewModel = () => {
     },
   ];
 
-  return { buttonOptions, system };
+  const motionSettings = {
+    initial: {
+      opacity: 0,
+    },
+    animate: {
+      opacity: 1,
+    },
+    exit: {
+      opacity: 0,
+      transition: {
+        duration: 3.5,
+      },
+    },
+  };
+
+  useEffect((): void => {
+    fetchQuote(dispatch);
+  }, [dispatch]);
+
+  return { buttonOptions, system, motionSettings };
 };

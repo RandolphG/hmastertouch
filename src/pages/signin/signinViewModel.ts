@@ -21,9 +21,22 @@ export const SigninViewModel = () => {
       [event.target.name]: event.target.value,
     });
 
-    console.log(`USER NAME: ${playerInfo.userName}`);
     dispatch(requestSetUserNameAction(playerInfo));
   }
 
-  return { handleChange, playerInfo, navigate };
+  const motionSettings = {
+    initial: {
+      x: 50,
+      opacity: 0,
+    },
+    animate: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: {
+      opacity: 0,
+    },
+  };
+
+  return { handleChange, playerInfo, navigate, motionSettings };
 };
