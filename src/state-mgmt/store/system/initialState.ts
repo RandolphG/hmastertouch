@@ -1,6 +1,7 @@
 import { ISystemState } from "./types";
 
 export const initialState: ISystemState = {
+  gameState: "INITIAL",
   userName: "",
   status: "",
   alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""),

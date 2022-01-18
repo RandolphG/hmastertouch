@@ -2,17 +2,20 @@ import React, { Fragment, useEffect, useState } from "react";
 import "./styles/_countdownTimerStyles.scss";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { requestSetGameStateAction } from "../../../../state-mgmt";
 
 /**
  * Countdown Timer
  */
 const CountdownTimer = () => {
+  const dispatch = useDispatch();
   const [hidden, setHidden] = useState(true);
 
   useEffect(() => {
     let interval = setTimeout(() => {
+      dispatch(requestSetGameStateAction("PLAYING"));
       setHidden(false);
-      console.log("Hidden!!");
     }, 5000);
 
     return () => {

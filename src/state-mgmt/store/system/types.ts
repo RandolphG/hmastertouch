@@ -1,4 +1,5 @@
 export interface ISystemState {
+  gameState: gameState;
   userName: string;
   status: string;
   alphabet: string[];
@@ -37,3 +38,5 @@ export interface ITimer {
 }
 
 export type Letter = string;
+
+export type gameState = "INITIAL" | "PLAYING" | "PAUSED" | "FINISHED";

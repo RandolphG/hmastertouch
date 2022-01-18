@@ -23,7 +23,7 @@ export const {
   requestSetHighScores,
   requestSetButtonId,
   requestShowModalAction,
-  requestTimerOnTick,
+  requestSetGameStateAction,
 } = systemSlice.actions;
 
 export default systemSlice.reducer;

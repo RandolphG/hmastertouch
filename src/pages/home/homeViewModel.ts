@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchQuote } from "../../services";
 import {
   requestSetButtonId,
+  requestSetGameStateAction,
   requestStartTimer,
   selectSystemState,
 } from "../../state-mgmt";
@@ -57,6 +58,7 @@ export const HomeViewModel = () => {
   };
 
   useEffect((): void => {
+    dispatch(requestSetGameStateAction("INITIAL"));
     fetchQuote(dispatch);
   }, [dispatch]);
 

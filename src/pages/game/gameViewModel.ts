@@ -20,6 +20,7 @@ import { gameDetails, handleSelectLetterProps } from "./types";
 export const GameViewModel = () => {
   let navigate = useNavigate();
   const {
+    gameState,
     selectedLetters,
     alphabet,
     showModal,
@@ -42,6 +43,20 @@ export const GameViewModel = () => {
     exit: {
       opacity: 0,
     },
+  };
+
+  const authorMotionSettings = {
+    initial: { x: 25, opacity: 0 },
+    animate: { x: 0, opacity: 1 },
+    exit: { opacity: 1 },
+    transition: { duration: 0.3, delay: 0.3 },
+  };
+
+  const containerMotionSettings = {
+    initial: { scale: 0.75, opacity: 0 },
+    animate: { scale: 1, opacity: 1 },
+    exit: { opacity: 1 },
+    transition: { duration: 0.3 },
   };
 
   const handleSelectLetter = useCallback(
@@ -96,6 +111,7 @@ export const GameViewModel = () => {
   }, []);
 
   return {
+    gameState,
     handleSelectLetter,
     ErrorBoundary,
     requestResetGameAction,
@@ -106,5 +122,7 @@ export const GameViewModel = () => {
     author,
     content,
     selectedLetters,
+    authorMotionSettings,
+    containerMotionSettings,
   };
 };

@@ -1,6 +1,12 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 
-import { IPlayerCredentials, IQuoteInfo, ISystemState, Letter } from "./types";
+import {
+  gameState,
+  IPlayerCredentials,
+  IQuoteInfo,
+  ISystemState,
+  Letter,
+} from "./types";
 
 export const reducers = {
   requestSetUserNameAction: (
@@ -142,6 +148,15 @@ export const reducers = {
     return {
       ...state,
       showModal: action.payload,
+    };
+  },
+  requestSetGameStateAction: (
+    state: ISystemState,
+    action: PayloadAction<gameState>
+  ) => {
+    return {
+      ...state,
+      gameState: action.payload,
     };
   },
 };

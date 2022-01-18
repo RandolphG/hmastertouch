@@ -19,10 +19,9 @@ export const ModalViewModal = () => {
   };
 
   const results: results = [
-    { info: "Score", value: 1999 },
     { info: "Time", value: duration },
     { info: "Errors", value: errors },
-    { info: "Guesses", value: guesses },
+    { info: "Guesses", value: guesses / 1000 },
   ];
 
   function toggleModal() {

@@ -18,6 +18,7 @@
     flex-direction: column;
     justify-content: space-between;
 
+
     &_modalTitle {
       font-size: 1.5rem;
       border: purple 3px solid;
@@ -28,30 +29,52 @@
       align-items: center;
     }
 
-    &_details{
-      border: red 3px solid;
-      width: 100%;
-      height: 100%;
+    &_elementContainer {
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: flex-start;
-      font-size: 1.7rem;
+      flex-direction: row;
 
-      padding: 2rem;
+      &_score {
+        font-size: 4rem;
+        width: 50%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: purple 3px solid;
+      }
+
+      &_details {
+        font-size: 3rem;
+        border: red 3px solid;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+
+        &_container {
+          font-size: 3rem;
+          border: green 3px solid;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: flex-start;
+          padding: 1rem;
+        }
+      }
     }
+
 
     &_modalButton {
       font-family: $font-main;
-      font-size: 1.5rem;
-      border: red 3px solid;
+      font-size: 1.9rem;
       width: 100%;
       height: 20%;
-      z-index: 100;
     }
   }
-
-
 
   &_closeButton {
     border: red 3px solid;
