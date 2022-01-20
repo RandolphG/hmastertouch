@@ -1,1 +1,1 @@
-export type results = { info: string; value: number }[];
+export type results = { info: string; value: number | string }[];

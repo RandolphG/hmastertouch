@@ -9,7 +9,24 @@ import { store } from "./state-mgmt";
 import Routes from "./routing";
 import "./theme/_style.scss";
 
+// @ts-ignore
+import { registerObserver } from "react-perf-devtool";
+
 let persists = persistStore(store);
+
+const options = {
+  shouldLog: true,
+  port: 3000,
+  timeout: 12000, // Load the extension after 12 sec.
+  components: ["Letters", "Game"],
+};
+
+function callback(measures: any) {
+  // do something with the measures
+}
+
+// assign the observer to the global scope, as the GC will delete it otherwise
+registerObserver(options, callback);
 
 ReactDOM.render(
   <Provider store={store}>

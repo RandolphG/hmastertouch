@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React from "react";
 import { ErrorBoundary } from "../../components";
 import { ScoresViewModel } from "./scoresViewModel";
@@ -9,9 +10,44 @@ import "./styles/_scoresStyles.scss";
 const Scores = () => {
   const { sortedHighScore } = ScoresViewModel();
 
+  const Header = () => (
+    <thead>
+      <tr>
+        <th>#score</th>
+        <th>nickname</th>
+        <th>time</th>
+        <th>errors</th>
+      </tr>
+    </thead>
+  );
+
+  const ScoreSheet = () => (
+    <tbody>
+      {sortedHighScore.map((score, idx) => (
+        <tr key={idx}>
+          <td>{score.score}</td>
+          <td>{score.userName}</td>
+          <td>{score.duration}</td>
+          <td>{score.errors}</td>
+        </tr>
+      ))}
+    </tbody>
+  );
+
+  const Container = ({ children }: any) => (
+    <div className="board__content-item board__content-leaderboard">
+      <table
+        className="board__leaderboard leaderboard"
+        aria-label="leaderboard"
+      >
+        {children}
+      </table>
+    </div>
+  );
+
   return (
     <ErrorBoundary>
-      <div className="score">
+      <motion.div className="score">
         <div className="score_container">
           <div
             style={{
@@ -21,34 +57,13 @@ const Scores = () => {
               alignItems: "center",
             }}
           >
-            <div className="board__content-item board__content-leaderboard">
-              <table
-                className="board__leaderboard leaderboard"
-                aria-label="leaderboard"
-              >
-                <thead>
-                  <tr>
-                    <th>#score</th>
-                    <th>nickname</th>
-                    <th>time</th>
-                    <th>errors</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {sortedHighScore.map((score, idx) => (
-                    <tr>
-                      <td>{score.score}</td>
-                      <td>{score.userName}</td>
-                      <td>{score.duration}</td>
-                      <td>{score.errors}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <Container>
+              <Header />
+              <ScoreSheet />
+            </Container>
           </div>
         </div>
-      </div>
+      </motion.div>
     </ErrorBoundary>
   );
 };

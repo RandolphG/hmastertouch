@@ -24,6 +24,7 @@ export const {
   requestSetButtonId,
   requestShowModalAction,
   requestSetGameStateAction,
+  requestSetScore,
 } = systemSlice.actions;
 
 export default systemSlice.reducer;

@@ -1,8 +1,6 @@
 import React, { FC, Fragment } from "react";
-import { Modal } from "../../components";
-import { CountdownTimer, Letters, Stopwatch, WordBoard } from "./components";
+import { Letters, Stopwatch, Quote } from "./components";
 import { GameViewModel } from "./gameViewModel";
-import { IGame } from "./types";
 import { motion } from "framer-motion";
 import "./styles/_gameStyles.scss";
 
@@ -11,52 +9,49 @@ import "./styles/_gameStyles.scss";
  */
 const Game: FC = () => {
   const {
+    info,
     gameState,
-    content,
-    alphabet,
+    quote,
     author,
     handleSelectLetter,
     ErrorBoundary,
     selectedLetters,
     authorMotionSettings,
-    containerMotionSettings,
+    newQuote,
   } = GameViewModel();
-
-  const Author = () => (
-    <motion.div {...authorMotionSettings} className="author">
-      - {author}
-    </motion.div>
-  );
-
-  const GameBoard = ({ word, selectedLetters, onLetterClick }: IGame) => (
-    <Fragment>
-      {gameState === "PLAYING" && (
-        <motion.div {...containerMotionSettings} className="hang-man-game">
-          <Stopwatch />
-          <WordBoard word={word} selectedLetters={selectedLetters} />
-          <div className="footer">
-            <Author />
-            <Letters
-              alphabet={alphabet}
-              word={word}
-              selectedLetters={selectedLetters}
-              onLetterClick={onLetterClick}
-            />
-          </div>
-        </motion.div>
-      )}
-    </Fragment>
-  );
 
   return (
     <ErrorBoundary>
-      <Modal />
-      <CountdownTimer />
-      <GameBoard
-        word={content}
-        selectedLetters={selectedLetters}
-        onLetterClick={handleSelectLetter}
-      />
+      <Fragment>
+        {gameState === "PLAYING" && (
+          <motion.div className="hang-man-game">
+            <div className="dashboard_container_max_info">
+              {info.map((info: any, idx: number) => (
+                <motion.div
+                  key={`info-${idx}`}
+                  initial={{ opacity: 0, translateY: -15 }}
+                  animate={{ opacity: 1, translateY: 0 }}
+                  transition={{ duration: 0.4, delay: idx * 0.1 }}
+                  className={`dashboard_container_max_${info.style}`}
+                >
+                  {info.title} : {info.value}
+                </motion.div>
+              ))}
+            </div>
+            <Stopwatch />
+            <Quote quote={quote} selectedLetters={selectedLetters} />
+            <div className="footer">
+              <motion.div {...authorMotionSettings} className="author">
+                - {author}
+              </motion.div>
+              <Letters quote={quote} onLetterClick={handleSelectLetter} />
+            </div>
+            <button className="resetButton" onClick={newQuote}>
+              New Quote
+            </button>
+          </motion.div>
+        )}
+      </Fragment>
     </ErrorBoundary>
   );
 };

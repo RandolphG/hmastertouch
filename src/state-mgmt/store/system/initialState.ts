@@ -2,7 +2,9 @@ import { ISystemState } from "./types";
 
 export const initialState: ISystemState = {
   gameState: "INITIAL",
+  countdownTimer: false,
   userName: "",
+  score: 0,
   status: "",
   alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""),
   selectedLetters: [],
@@ -10,9 +12,9 @@ export const initialState: ISystemState = {
   correct: 0,
   errors: 0,
   guesses: 0,
-  quote: {
+  api: {
     author: "",
-    content: "",
+    quote: "",
     uniqueCharacters: "",
     uniqueCharactersLength: 0,
     length: 0,

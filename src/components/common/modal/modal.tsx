@@ -8,7 +8,8 @@ import "./styles/_modalStyles.scss";
  * Modal for results
  */
 const Modal = () => {
-  const { showModal, toggleModal, motionSettings, results } = ModalViewModal();
+  const { showModal, score, toggleModal, gameState, motionSettings, results } =
+    ModalViewModal();
 
   /* element container */
   const Container = ({ children }: any) => (
@@ -29,7 +30,7 @@ const Modal = () => {
 
   /* calculated game score*/
   const Score = () => (
-    <div className="results_container_elementContainer_score">SCORE</div>
+    <div className="results_container_elementContainer_score">{score}</div>
   );
 
   /* statistic game details */
@@ -56,18 +57,14 @@ const Modal = () => {
   );
 
   return createPortal(
-    <Fragment>
-      {showModal && (
-        <Container>
-          <Title />
-          <ElementContainer>
-            <Score />
-            <Details />
-          </ElementContainer>
-          <Button />
-        </Container>
-      )}
-    </Fragment>,
+    <Container>
+      <Title />
+      <ElementContainer>
+        <Score />
+        <Details />
+      </ElementContainer>
+      <Button />
+    </Container>,
     document.getElementById("modal")!
   );
 };

@@ -56,7 +56,7 @@
 
 
 .hang-man-game {
-  border: #0086e4 2px solid;
+  //border: #0086e4 2px solid;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -64,7 +64,7 @@
 
 
   .word-board {
-    border: #0086e4 2px solid;
+    //border: #0086e4 2px solid;
     margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
@@ -72,7 +72,7 @@
   }
 
   .word-board-letter {
-    border: #e73c7e 2px solid;
+    //border: #e73c7e 2px solid;
     display: flex;
     padding: 10px;
     border-radius: 3px;
@@ -84,11 +84,11 @@
   .footer {
     display: flex;
     flex-direction: column;
-    border: solid green 2px;
+    //border: solid green 2px;
   }
 
   .author {
-    border: #ee7752 2px solid;
+    //border: #ee7752 2px solid;
     font-size: 1.5rem;
     margin-bottom: 1rem;
     padding-right: 1rem;
@@ -96,7 +96,7 @@
   }
 
   .letter-board {
-    border: #0086e4 2px solid;
+    //border: #0086e4 2px solid;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -126,4 +126,16 @@
       cursor: auto;
     }
   }
+
+  .resetButton {
+    border: none;
+    color: white;
+    background: black;
+    font-family: $font-main;
+    font-size: 1.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
 }

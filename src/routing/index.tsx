@@ -18,7 +18,7 @@ let index: RouteObject[] = [
     children: [
       { index: true, element: <Game /> },
       {
-        path: "dashboard/scores",
+        path: "scores",
         element: <Scores />,
       },
     ],

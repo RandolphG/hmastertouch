@@ -1,9 +1,11 @@
-import React, { memo } from "react";
-import { ILetters } from "../types";
+import React from "react";
+import { ILetters } from "../../types";
 import Letter from "./letter";
+import { LettersViewModel } from "./LettersViewModel";
 
-const Letters = memo(
-  ({ alphabet, word, selectedLetters, onLetterClick }: ILetters) => (
+const Letters = ({ onLetterClick }: ILetters) => {
+  const { alphabet, selectedLetters, quote } = LettersViewModel();
+  return (
     <div className="letter-board">
       {alphabet.map((letter: string, idx: number) => {
         const showLetter = !!selectedLetters.find((i) => i === letter);
@@ -14,14 +16,14 @@ const Letters = memo(
             idx={idx}
             letter={letter}
             showLetter={showLetter}
-            word={word}
+            quote={quote}
             selectedLetters={selectedLetters}
             onLetterClick={onLetterClick}
           />
         );
       })}
     </div>
-  )
-);
+  );
+};
 
 export default Letters;

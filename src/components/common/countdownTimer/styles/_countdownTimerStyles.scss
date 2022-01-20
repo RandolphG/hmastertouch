@@ -13,14 +13,16 @@ $bg: black;
 
 .app {
   height: 100%;
+  pointer-events: none;
 }
 
 .app__screen {
   height: 100%;
+  pointer-events: none;
 }
 
 .countdown {
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.85);
   display: grid;
   place-items: center;
   animation: screenSlideDown $screenAnimationDuration;
@@ -28,7 +30,6 @@ $bg: black;
 
 .countdown__container {
   $size: 36rem;
-
   position: relative;
   display: grid;
   place-items: center;
@@ -72,8 +73,6 @@ $bg: black;
     }
   }
 }
-
-/* --- timer --- */
 
 .countdown-timer {
   overflow: hidden;
@@ -138,5 +137,3 @@ $bg: black;
     $rotateX: $rotateX + $countdown-rotateAngle;
   }
 }
-
-/* ------ end: COUNTDOWN SCREEN ------ */

@@ -25,9 +25,9 @@ export const useTimer = () => {
 
   /* convert elapsed time */
   const convertTime = useCallback((elapsedTime: number) => {
-    const SS = parseInt(leadZero((elapsedTime % 60).toFixed(1), 2));
-    const MM = parseInt(leadZero(((elapsedTime / 60) % 60).toFixed(), 2));
-    const HH = parseInt(leadZero(((elapsedTime / 60 / 60) % 24).toFixed(), 2));
+    const SS = Number(leadZero((elapsedTime % 60).toFixed(2), 2));
+    const MM = Number(leadZero(((elapsedTime / 60) % 60).toFixed(), 2));
+    const HH = Number(leadZero(((elapsedTime / 60 / 60) % 24).toFixed(), 2));
 
     return {
       SS,

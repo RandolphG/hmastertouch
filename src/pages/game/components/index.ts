@@ -1,4 +1,3 @@
-export { default as Letters } from "./letters";
-export { default as WordBoard } from "./wordBoard";
+export { Letters } from "./letters";
+export { Quote } from "./quote";
 export { Stopwatch } from "./stopwatch";
-export { CountdownTimer } from "./countdownTimer";

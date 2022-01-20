@@ -1,6 +1,8 @@
 export interface ISystemState {
   gameState: gameState;
+  countdownTimer: boolean;
   userName: string;
+  score: number;
   status: string;
   alphabet: string[];
   selectedLetters: string[];
@@ -8,8 +10,8 @@ export interface ISystemState {
   correct: number;
   errors: number;
   guesses: number;
-  quote: IQuoteInfo;
-  timer: ITimer;
+  api: Api;
+  timer: Timer;
   highScores: any[];
   buttonId: number;
   showModal: boolean;
@@ -19,9 +21,9 @@ export interface IPlayerCredentials {
   userName: string;
 }
 
-export interface IQuoteInfo {
+export interface Api {
   author: string;
-  content: string;
+  quote: string;
   uniqueCharacters: string;
   uniqueCharactersLength: number;
   length: number;
@@ -29,7 +31,7 @@ export interface IQuoteInfo {
   _id: string;
 }
 
-export interface ITimer {
+export interface Timer {
   startTime: number;
   elapsedTime: number;
   endTime: number;

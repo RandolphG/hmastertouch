@@ -1,45 +1,36 @@
+import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchQuote } from "../../services";
 import { requestResetGameAction, selectSystemState } from "../../state-mgmt";
+import { buttons } from "./types";
 
 export const DashboardViewModel = () => {
   let navigate = useNavigate();
-  const system = useSelector(selectSystemState);
+  const { gameState } = useSelector(selectSystemState);
   const dispatch = useDispatch();
 
-  function navigateTo(url: string) {
+  const navigateTo = useCallback((url: string) => {
     navigate(url);
-  }
+  }, []);
 
-  function reset() {
+  const reset = useCallback(() => {
     navigate("/");
     dispatch(requestResetGameAction(""));
-  }
+  }, []);
 
-  function newQuote() {
-    fetchQuote(dispatch);
-    dispatch(requestResetGameAction(""));
-  }
-
-  const info: any = [
-    { title: `User Name`, value: system.userName, style: "userName" },
-    { title: `Correct`, value: system.correct, style: "userName" },
-    { title: `Guesses`, value: system.guesses, style: "userName" },
-    { title: `Errors`, value: system.errors, style: "errors" },
-  ];
-
-  const buttons = [
-    { title: `Home`, onClick: reset },
-    { title: `Game`, onClick: () => navigateTo("") },
-    { title: `High Scores`, onClick: () => navigateTo("dashboard/scores") },
-    { title: `New Quote`, onClick: newQuote },
+  const buttons: buttons = [
+    { title: `Home`, location: "/", onClick: reset },
+    { title: `Game`, location: "/dashboard", onClick: () => navigateTo("") },
+    {
+      title: `High Scores`,
+      location: "dashboard/dashboard/scores",
+      onClick: () => navigateTo("scores"),
+    },
   ];
 
   return {
-    info,
-    system,
     navigate,
     buttons,
+    gameState,
   };
 };

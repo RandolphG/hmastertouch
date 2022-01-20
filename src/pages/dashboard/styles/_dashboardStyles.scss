@@ -2,7 +2,6 @@
 
 .dashboard {
   box-sizing: border-box;
-  border: #ee7752 1px solid;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,10 +9,9 @@
   width: 100%;
   color: white;
 
-
   &_container {
     box-sizing: border-box;
-    border: #23d5ab 1px solid;
+    border: white 1px solid;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -23,7 +21,7 @@
 
     &_max {
       position: relative;
-      border: #ee7752 7px solid;
+      //border: #ee7752 7px solid;
       height: 100%;
       width: 90%;
       max-width: 900px;
@@ -37,7 +35,7 @@
         font-size: 1.3rem;
         width: 100%;
         padding: 0 2rem;
-        border: #ee7752 2px solid;
+        //border: #ee7752 2px solid;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -47,17 +45,24 @@
       &_buttons {
         margin: 1rem 0;
         width: 100%;
-        border: #ee7752 2px solid;
         display: flex;
         flex-direction: row;
 
         &_button {
+          border:none;
+          color: white;
+          background:black;
           font-family: $font-main;
           font-size: 1.3rem;
           font-weight: bold;
           width: 100%;
           display: flex;
           justify-content: center;
+
+          &:hover{
+            color: #ee7752;
+            transform: scale(1.1);
+          }
         }
       }
     }

@@ -1,12 +1,12 @@
+import React, { FC } from "react";
 import { motion } from "framer-motion";
-import React, { FC, memo } from "react";
 import { SigninViewModel } from "./signinViewModel";
 import "./styles/_signinStyles.scss";
 
 /**
  * SignIn
  **/
-const SignIn: FC = memo(() => {
+const SignIn: FC = () => {
   const { handleChange, playerInfo, motionSettings } = SigninViewModel();
 
   return (
@@ -26,6 +26,6 @@ const SignIn: FC = memo(() => {
       </motion.div>
     </motion.div>
   );
-});
+};
 
 export default SignIn;

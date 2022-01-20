@@ -16,21 +16,20 @@ const Notifications = () => {
       <div className="notification_container">
         <ul className="notification_container_list">
           <AnimatePresence initial={false}>
-            {notifications &&
-              notifications.map((notification: any, idx: number) => {
-                remove(notification.message);
-                return (
-                  <motion.li
-                    className="notification_container_list_item"
-                    key={idx}
-                    {...motionSettings}
-                  >
-                    <span className="notification_container_list_item_message">
-                      {notification.message}
-                    </span>
-                  </motion.li>
-                );
-              })}
+            {notifications.map((notification: any, idx: number) => {
+              remove(notification.message);
+              return (
+                <motion.li
+                  className="notification_container_list_item"
+                  key={idx}
+                  {...motionSettings}
+                >
+                  <span className="notification_container_list_item_message">
+                    {notification.message}
+                  </span>
+                </motion.li>
+              );
+            })}
           </AnimatePresence>
         </ul>
       </div>

@@ -1,8 +1,9 @@
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setUserHighScore } from "../../services";
+import { fetchQuote, setUserHighScore } from "../../services";
 import {
+  selectSystemState,
   requestIncreaseCorrectAction,
   requestIncreaseErrorsAction,
   requestIncreaseGuessesAction,
@@ -11,26 +12,41 @@ import {
   requestStopTimer,
   requestAddNotification,
   requestSetButtonId,
-  selectSystemState,
-  requestShowModalAction,
+  requestSetGameStateAction,
+  requestSetScore,
 } from "../../state-mgmt";
 import { ErrorBoundary } from "../../components";
+import { calculateScore } from "../../util";
 import { gameDetails, handleSelectLetterProps } from "./types";
 
 export const GameViewModel = () => {
   let navigate = useNavigate();
   const {
     gameState,
+    correct,
+    guesses,
     selectedLetters,
-    alphabet,
-    showModal,
     errors,
-    timer: { duration },
+    timer: { duration, elapsedTime },
     userName,
-    quote: { _id, length, uniqueCharacters, author, content },
+    api: {
+      _id,
+      length,
+      uniqueCharacters,
+      uniqueCharactersLength,
+      author,
+      quote,
+    },
   } = useSelector(selectSystemState);
   const dispatch = useDispatch();
 
+  function newQuote() {
+    fetchQuote(dispatch);
+    dispatch(requestResetGameAction(""));
+    dispatch(requestSetGameStateAction("INITIAL"));
+  }
+
+  /* motion settings */
   const motionSettings = {
     initial: {
       x: 50,
@@ -49,18 +65,19 @@ export const GameViewModel = () => {
     initial: { x: 25, opacity: 0 },
     animate: { x: 0, opacity: 1 },
     exit: { opacity: 1 },
-    transition: { duration: 0.3, delay: 0.3 },
+    transition: { duration: 0.3, delay: 1.3 },
   };
 
-  const containerMotionSettings = {
-    initial: { scale: 0.75, opacity: 0 },
-    animate: { scale: 1, opacity: 1 },
-    exit: { opacity: 1 },
-    transition: { duration: 0.3 },
-  };
+  const info: any = [
+    { title: `User Name`, value: userName, style: "userName" },
+    { title: `Correct`, value: correct, style: "userName" },
+    { title: `Guesses`, value: guesses, style: "userName" },
+    { title: `Errors`, value: errors, style: "errors" },
+  ];
 
+  /* game logic */
   const handleSelectLetter = useCallback(
-    ({ letter, word, selectedLetters }: handleSelectLetterProps) => {
+    ({ letter, quote, selectedLetters }: handleSelectLetterProps) => {
       dispatch(requestSetSelectedLetter(letter));
       dispatch(requestIncreaseGuessesAction(undefined));
 
@@ -77,7 +94,7 @@ export const GameViewModel = () => {
       /* Check if the quote is completed */
       if (matchWholeWord) {
         dispatch(requestStopTimer(undefined));
-        dispatch(requestAddNotification({ title: "Game Complete!" }));
+        // dispatch(requestAddNotification({ title: "Game Complete!" }));
 
         /* game results to post to server */
         const gameDetails: gameDetails = {
@@ -90,16 +107,26 @@ export const GameViewModel = () => {
         };
 
         setUserHighScore(dispatch, gameDetails);
-        dispatch(requestShowModalAction(!showModal));
+
+        const score = calculateScore(
+          length,
+          uniqueCharactersLength,
+          errors,
+          elapsedTime
+        );
+
+        dispatch(requestSetScore(score));
+        dispatch(requestSetGameStateAction("FINISHED"));
+
         return;
       }
 
       /* If the letter is inside the quote */
-      if (word.indexOf(letter.toLowerCase()) === -1) {
+      if (quote.indexOf(letter.toLowerCase()) === -1) {
         dispatch(requestIncreaseErrorsAction(undefined));
         dispatch(requestAddNotification({ title: `${letter} not found!` }));
         /* If the letter isn't inside the quote */
-      } else if (word.indexOf(letter.toLowerCase()) !== -1) {
+      } else if (quote.indexOf(letter.toLowerCase()) !== -1) {
         dispatch(requestIncreaseCorrectAction(undefined));
       }
     },
@@ -111,6 +138,7 @@ export const GameViewModel = () => {
   }, []);
 
   return {
+    info,
     gameState,
     handleSelectLetter,
     ErrorBoundary,
@@ -118,11 +146,10 @@ export const GameViewModel = () => {
     dispatch,
     navigate,
     motionSettings,
-    alphabet,
     author,
-    content,
+    quote,
     selectedLetters,
     authorMotionSettings,
-    containerMotionSettings,
+    newQuote,
   };
 };

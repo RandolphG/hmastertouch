@@ -1,4 +1,5 @@
 import axios from "axios";
+import { gameDetails } from "../../pages";
 import {
   requestAddNotification,
   requestSetHighScores,
@@ -11,23 +12,23 @@ import { data } from "./types";
 const url = process.env.REACT_APP_GET_URL;
 const postUrl = process.env.REACT_APP_POST_URL;
 
+/* fetch quote info */
 export const fetchQuote = (dispatch: any) => {
   dispatch(requestStartTimer(undefined));
 
-  /* fetch quote info */
   axios
     .get(url!)
-    .then(function (response) {
+    .then((response) => {
       const data: data = response.data;
-      const { author, content, length, tags, _id } = data;
+      const { author, content: quote, length, tags, _id } = data;
 
-      const uniqueCharacters = findUniqueLettersInString(content);
-      const uniqueCharactersLength = findUniqueLettersInString(content).length;
+      const uniqueCharacters = findUniqueLettersInString(quote);
+      const uniqueCharactersLength = findUniqueLettersInString(quote).length;
 
       dispatch(
         requestSetQuoteAction({
           author,
-          content,
+          quote,
           uniqueCharacters,
           uniqueCharactersLength,
           length,
@@ -35,10 +36,8 @@ export const fetchQuote = (dispatch: any) => {
           _id,
         })
       );
-
-      dispatch(requestAddNotification({ title: "Quote loaded !" }));
     })
-    .catch(function (error) {
+    .catch((error) => {
       dispatch(
         requestAddNotification({ title: "Error with the words API request" })
       );
@@ -47,34 +46,33 @@ export const fetchQuote = (dispatch: any) => {
     });
 };
 
-export const setUserHighScore = (dispatch: any, gameDetails: any) => {
+/* set highScore info */
+export const setUserHighScore = (dispatch: any, gameDetails: gameDetails) => {
   const config = { headers: { "Content-Type": "application/json" } };
 
   axios
     .post(postUrl!, gameDetails, config)
-    .then(function (response) {
+    .then(() => {
       dispatch(requestAddNotification({ title: "Score Posted" }));
     })
-    .catch(function (error) {
+    .catch((error) => {
       dispatch(requestAddNotification({ title: "Error with posting score" }));
-
       console.log("Error :", error);
     });
 };
 
+/* get highScore info*/
 export const getHighScores = (dispatch: any) => {
   axios
     .get(postUrl!)
-    .then(function (response) {
-      console.log(`highScore response`, response);
+    .then((response) => {
       const { data } = response;
 
       dispatch(requestSetHighScores(data));
       dispatch(requestAddNotification({ title: "Success" }));
     })
-    .catch(function (error) {
+    .catch((error) => {
       dispatch(requestAddNotification({ title: "Error with getting scores" }));
-
       console.log("Error :", error);
     });
 };

@@ -1,48 +1,35 @@
-export interface IGame {
-  word: string;
-  selectedLetters: string[];
+export interface ILetters {
+  quote: string;
   onLetterClick: ({
-    word,
+    quote,
     letter,
     selectedLetters,
-  }: {
-    word: string;
-    letter: string;
-    selectedLetters: string[];
-  }) => void;
+  }: handleSelectLetterProps) => void;
 }
 
-export interface ILetter extends IGame {
+export interface ILetter {
   idx: number;
   letter: string;
   showLetter: boolean;
-}
-
-export interface IWordBoard {
-  word: string;
   selectedLetters: string[];
-}
-
-export interface ILetters {
-  alphabet: string[];
-  word: string;
-  selectedLetters: string[];
+  quote: string;
   onLetterClick: ({
-    word,
+    quote,
     letter,
     selectedLetters,
-  }: {
-    word: string;
-    letter: string;
-    selectedLetters: string[];
-  }) => void;
+  }: handleSelectLetterProps) => void;
+}
+
+export interface IQuote {
+  quote: string;
+  selectedLetters: string[];
 }
 
 export type charset = { [key: string]: string };
 
 export type handleSelectLetterProps = {
   letter: string;
-  word: string;
+  quote: string;
   selectedLetters: string[];
 };
 

@@ -1,38 +1,13 @@
 $bg: black;
-$bg-victory: rgb(16, 144, 94);
-$bg-defeat: rgb(142, 16, 16);
-
 $color-primary: #4488ff;
-$color-secondary: #d73739;
-$color-text-primary: rgb(255, 255, 255);
 $color-text-secondary: rgb(255, 255, 255);
-
 $breakpoint: 48em;
-
-$font-primary: "PT Mono", monospace;
 $font-secondary: "Manrope", sans-serif;
 $fontWeight-normal: 400;
 $fontWeight-bold: 700;
-
 $borderColor: rgb(255, 255, 255);
-$borderColor-hover: rgb(255, 255, 255);
-
-$outlineWidth: .25rem;
-$outlineOffset: .25em;
-$outlineColor: $color-primary;
-
-$controlHeight: 3em;
-$controlFontSize: 1rem;
-$controlLineHeight: 1.25;
-$controlLineBox: $controlFontSize * $controlLineHeight;
-$controlBorderWidth: .063em;
-$controlBorderColor: $borderColor;
-
 $layoutPadding: 1rem;
-$layoutPadding-large: 3.5rem;
-
-$screenAnimationDuration: .5s;
-
+$layoutPadding-large: 2.5rem;
 
 .board__content {
   position: relative;
@@ -43,7 +18,7 @@ $screenAnimationDuration: .5s;
 .board__content-item {
   flex-shrink: 0;
   display: grid;
-  place-items: center;
+  /*place-items: center;*/
   width: 100%;
   padding: 0 $layoutPadding;
   transition-property: visibility, opacity, transform;
@@ -66,8 +41,9 @@ $screenAnimationDuration: .5s;
 }
 
 .score {
+  overflow-y: scroll;
   box-sizing: border-box;
-  border: #676767 1px solid;
+  border: purple 4px solid;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -84,7 +60,7 @@ $screenAnimationDuration: .5s;
     align-items: center;
     height: 90%;
     width: 100%;
-    max-width: 900px;
+    //max-width: 900px;
     padding: 1rem;
     justify-content: flex-start;
 

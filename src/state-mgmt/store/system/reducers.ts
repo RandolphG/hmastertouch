@@ -3,12 +3,15 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import {
   gameState,
   IPlayerCredentials,
-  IQuoteInfo,
+  Api,
   ISystemState,
   Letter,
 } from "./types";
 
 export const reducers = {
+  requestSetScore: (state: ISystemState, action: PayloadAction<number>) => {
+    return { ...state, score: action.payload };
+  },
   requestSetUserNameAction: (
     state: ISystemState,
     action: PayloadAction<IPlayerCredentials>
@@ -16,11 +19,8 @@ export const reducers = {
     const playerInfo = action.payload;
     return { ...state, userName: playerInfo.userName };
   },
-  requestSetQuoteAction: (
-    state: ISystemState,
-    action: PayloadAction<IQuoteInfo>
-  ) => {
-    return { ...state, quote: action.payload };
+  requestSetQuoteAction: (state: ISystemState, action: PayloadAction<Api>) => {
+    return { ...state, api: action.payload };
   },
   requestSetHighScores: (state: ISystemState, action: PayloadAction<any[]>) => {
     return { ...state, highScores: action.payload };
@@ -89,20 +89,7 @@ export const reducers = {
       };
     }
   },
-  requestTimerOnTick: (state: ISystemState, action?: PayloadAction) => {
-    const { running, startTime, elapsedTime } = state.timer;
 
-    if (running) {
-      let now = Date.now();
-      return {
-        ...state,
-        timer: {
-          ...state.timer,
-          duration: elapsedTime + (now - startTime),
-        },
-      };
-    }
-  },
   requestStopTimer: (state: ISystemState, action?: PayloadAction) => {
     const { running, startTime } = state.timer;
 
