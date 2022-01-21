@@ -14,6 +14,7 @@ import {
   requestSetButtonId,
   requestSetGameStateAction,
   requestSetScore,
+  requestStartTimer,
 } from "../../state-mgmt";
 import { ErrorBoundary } from "../../components";
 import { calculateScore } from "../../util";
@@ -27,7 +28,7 @@ export const GameViewModel = () => {
     guesses,
     selectedLetters,
     errors,
-    timer: { duration, elapsedTime },
+    timer: { elapsedTime },
     userName,
     api: {
       _id,
@@ -69,75 +70,85 @@ export const GameViewModel = () => {
   };
 
   const info: any = [
-    { title: `User Name`, value: userName, style: "userName" },
     { title: `Correct`, value: correct, style: "userName" },
     { title: `Guesses`, value: guesses, style: "userName" },
     { title: `Errors`, value: errors, style: "errors" },
   ];
 
+  /* If the letter is inside the quote */
+  const handleLetterInQuoteCheck = (letter: string) => {
+    /* If the letter is inside the quote */
+    if (quote.indexOf(letter.toLowerCase()) === -1) {
+      dispatch(requestIncreaseErrorsAction(undefined));
+      dispatch(requestAddNotification({ title: `${letter} not found!` }));
+      /* If the letter isn't inside the quote */
+    } else if (quote.indexOf(letter.toLowerCase()) !== -1) {
+      dispatch(requestIncreaseCorrectAction(undefined));
+    }
+  };
+
+  /* Check if the quote is completed */
+  const handleGameComplete = (matchWholeWord: boolean) => {
+    /* Check if the quote is completed */
+    if (matchWholeWord) {
+      dispatch(requestStopTimer(undefined));
+      dispatch(requestAddNotification({ title: "Game Complete!" }));
+
+      /* game results to post to server */
+      const gameDetails: gameDetails = {
+        quoteId: _id,
+        length,
+        uniqueCharacters,
+        userName,
+        errors,
+        duration: elapsedTime,
+      };
+
+      setUserHighScore(dispatch, gameDetails);
+
+      const score = calculateScore(
+        length,
+        uniqueCharactersLength,
+        errors,
+        elapsedTime
+      );
+
+      dispatch(requestSetScore(score));
+      dispatch(requestSetGameStateAction("FINISHED"));
+    }
+  };
+
   /* game logic */
   const handleSelectLetter = useCallback(
-    ({ letter, quote, selectedLetters }: handleSelectLetterProps) => {
+    ({ letter, selectedLetters }: handleSelectLetterProps) => {
       dispatch(requestSetSelectedLetter(letter));
       dispatch(requestIncreaseGuessesAction(undefined));
 
       let matchWholeWord: boolean = true;
       let allSelectedLetters: string[] = [...selectedLetters, letter];
 
-      /* compare selected letter against unique letters*/
-      uniqueCharacters.split("").forEach((letter) => {
-        if (allSelectedLetters.indexOf(letter.toUpperCase()) === -1) {
-          matchWholeWord = false;
-        }
-      });
+      handleLetterInQuoteCheck(letter);
 
-      /* Check if the quote is completed */
-      if (matchWholeWord) {
-        dispatch(requestStopTimer(undefined));
-        // dispatch(requestAddNotification({ title: "Game Complete!" }));
+      /* compare selected letter against unique letters*/ uniqueCharacters
+        .split("")
+        .forEach((letter) => {
+          if (allSelectedLetters.indexOf(letter.toUpperCase()) === -1) {
+            matchWholeWord = false;
+          }
+        });
 
-        /* game results to post to server */
-        const gameDetails: gameDetails = {
-          quoteId: _id,
-          length,
-          uniqueCharacters,
-          userName,
-          errors,
-          duration,
-        };
-
-        setUserHighScore(dispatch, gameDetails);
-
-        const score = calculateScore(
-          length,
-          uniqueCharactersLength,
-          errors,
-          elapsedTime
-        );
-
-        dispatch(requestSetScore(score));
-        dispatch(requestSetGameStateAction("FINISHED"));
-
-        return;
-      }
-
-      /* If the letter is inside the quote */
-      if (quote.indexOf(letter.toLowerCase()) === -1) {
-        dispatch(requestIncreaseErrorsAction(undefined));
-        dispatch(requestAddNotification({ title: `${letter} not found!` }));
-        /* If the letter isn't inside the quote */
-      } else if (quote.indexOf(letter.toLowerCase()) !== -1) {
-        dispatch(requestIncreaseCorrectAction(undefined));
-      }
+      handleGameComplete(matchWholeWord);
     },
     []
   );
 
   useEffect(() => {
     dispatch(requestSetButtonId(1));
+    dispatch(requestStartTimer(undefined));
   }, []);
 
   return {
+    userName,
     info,
     gameState,
     handleSelectLetter,

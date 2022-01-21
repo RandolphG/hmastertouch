@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { requestSetUserNameAction } from "../../state-mgmt";
@@ -20,9 +20,13 @@ export const SigninViewModel = () => {
       ...playerInfo,
       [event.target.name]: event.target.value,
     });
-
-    dispatch(requestSetUserNameAction(playerInfo));
   }
+
+  useEffect(() => {
+    dispatch(requestSetUserNameAction(playerInfo));
+
+    return () => {};
+  }, [playerInfo]);
 
   const motionSettings = {
     initial: {

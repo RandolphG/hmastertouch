@@ -136,6 +136,12 @@
     width: 100%;
     display: flex;
     justify-content: center;
+
+    &:hover{
+      cursor: pointer;
+      color: #ee7752;
+      transform: scale(1.1);
+    }
   }
 
 }

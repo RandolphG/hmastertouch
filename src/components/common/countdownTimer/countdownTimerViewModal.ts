@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   requestSetGameStateAction,
@@ -8,12 +8,10 @@ import {
 export const CountdownTimerViewModal = () => {
   const dispatch = useDispatch();
   const { gameState } = useSelector(selectSystemState);
-  const [hidden, setHidden] = useState(true);
 
   useEffect(() => {
     let interval = setTimeout(() => {
       dispatch(requestSetGameStateAction("PLAYING"));
-      setHidden(false);
     }, 5000);
 
     return () => {
@@ -24,8 +22,7 @@ export const CountdownTimerViewModal = () => {
   const motionSettings = {
     initial: { scale: 0.85, opacity: 0 },
     animate: { scale: 1, opacity: 1 },
-    exit: { opacity: 0 },
-    transition: { duration: 0.2 },
+    exit: { scale: 0.85, opacity: 0 },
   };
 
   return { motionSettings, gameState };

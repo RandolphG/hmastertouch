@@ -1,15 +1,22 @@
 import { motion } from "framer-motion";
-import React, { Fragment } from "react";
+import React, { ReactChild, ReactFragment, ReactPortal } from "react";
 import { createPortal } from "react-dom";
 import { ModalViewModal } from "./modalViewModal";
 import "./styles/_modalStyles.scss";
+
+type ReactNode =
+  | ReactChild
+  | ReactFragment
+  | ReactPortal
+  | boolean
+  | null
+  | undefined;
 
 /**
  * Modal for results
  */
 const Modal = () => {
-  const { showModal, score, toggleModal, gameState, motionSettings, results } =
-    ModalViewModal();
+  const { score, motionSettings, results } = ModalViewModal();
 
   /* element container */
   const Container = ({ children }: any) => (
@@ -18,7 +25,7 @@ const Modal = () => {
     </div>
   );
 
-  /*container for game score details*/
+  /* container for game score details */
   const ElementContainer = ({ children }: any) => (
     <div className="results_container_elementContainer">{children}</div>
   );
@@ -28,7 +35,7 @@ const Modal = () => {
     <div className="results_container_modalTitle">Game Results</div>
   );
 
-  /* calculated game score*/
+  /* calculated game score */
   const Score = () => (
     <div className="results_container_elementContainer_score">{score}</div>
   );
@@ -51,9 +58,7 @@ const Modal = () => {
   );
 
   const Button = () => (
-    <button className="results_container_modalButton" onClick={toggleModal}>
-      Accept
-    </button>
+    <button className="results_container_modalButton">Accept</button>
   );
 
   return createPortal(

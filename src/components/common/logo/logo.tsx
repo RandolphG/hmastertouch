@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import "./styles/_logoStyles.scss";
+import { MessageText } from "./messageText";
 
 /**
  * Logo
@@ -10,7 +11,6 @@ const Logo = () => {
       <div className="glitch" data-text="HangMan">
         HangMan
       </div>
-      <div className="glow">HangMan</div>
     </Fragment>
   );
 

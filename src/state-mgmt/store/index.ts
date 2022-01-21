@@ -1,6 +1,6 @@
+// @ts-nocheck
 import { RootState } from "../../types";
 import systemReducer from "./system/slice";
-import notificationReducer from "./notification/slice";
 
 /* persist the data */
 import { persistReducer } from "redux-persist";
@@ -12,16 +12,14 @@ import { ISystemState } from "./system";
 import {
   connectRouter,
   routerMiddleware,
-  RouterState, // @ts-ignore
+  RouterState,
 } from "connected-react-router";
 
-//@ts-ignore
 export const history = createBrowserHistory<RouterState<ISystemState>>();
 
 export const rootReducer = combineReducers({
   router: connectRouter<RouterState<ISystemState>>(history),
   system: systemReducer,
-  notifications: notificationReducer,
 });
 
 const persistConfig = {
@@ -36,9 +34,7 @@ function configureAppStore(initialState?: any) {
   const middlewares = [routerMiddleware(history)];
   /* create store */
   return configureStore<RootState>({
-    //@ts-ignore
     reducer: persistedReducer,
-    //@ts-ignore
     middleware: middlewares,
     preloadedState: initialState,
   });
@@ -47,4 +43,3 @@ function configureAppStore(initialState?: any) {
 export const store = configureAppStore();
 
 export * from "./system";
-export * from "./notification";

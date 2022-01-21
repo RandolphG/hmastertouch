@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
 import React from "react";
+import { motion } from "framer-motion";
 import { ErrorBoundary } from "../../components";
 import { ScoresViewModel } from "./scoresViewModel";
 import "./styles/_scoresStyles.scss";
@@ -48,7 +48,14 @@ const Scores = () => {
   return (
     <ErrorBoundary>
       <motion.div className="score">
-        <div className="score_container">
+        <div
+          /* ref={draggableArea}
+          onMouseDown={startDragging}
+          onMouseUp={stopDragging}
+          onMouseLeave={stopDragging}
+          onMouseMove={dragging}*/
+          className="score_container"
+        >
           <div
             style={{
               width: "100%",

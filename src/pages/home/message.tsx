@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import "./styles/_homeStyles.scss";
 import { useDispatch } from "react-redux";
+import { MessageText } from "../../components/common/logo/messageText";
 import { requestSetButtonId } from "../../state-mgmt";
 
 /**
@@ -13,7 +14,11 @@ const Message = () => {
     dispatch(requestSetButtonId(1));
   }, [dispatch]);
 
-  return <div className="message">hanging with all the wise men...</div>;
+  return (
+    <div className="message">
+      <MessageText />
+    </div>
+  );
 };
 
 export default Message;

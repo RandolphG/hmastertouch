@@ -3,10 +3,8 @@ export interface ISystemState {
   countdownTimer: boolean;
   userName: string;
   score: number;
-  status: string;
   alphabet: string[];
   selectedLetters: string[];
-  loading: boolean;
   correct: number;
   errors: number;
   guesses: number;
@@ -14,7 +12,7 @@ export interface ISystemState {
   timer: Timer;
   highScores: any[];
   buttonId: number;
-  showModal: boolean;
+  notifications: Notification[];
 }
 
 export interface IPlayerCredentials {
@@ -33,12 +31,17 @@ export interface Api {
 
 export interface Timer {
   startTime: number;
-  elapsedTime: number;
   endTime: number;
+  elapsedTime: number;
   running: boolean;
-  duration: number;
 }
 
 export type Letter = string;
 
 export type gameState = "INITIAL" | "PLAYING" | "PAUSED" | "FINISHED";
+
+export interface INotificationsPayload {
+  title: Notification;
+}
+
+export type Notification = string;

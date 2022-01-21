@@ -1,4 +1,3 @@
-import { AnimatePresence } from "framer-motion";
 import React, { FC, Suspense } from "react";
 import { RouteObject, useRoutes } from "react-router-dom";
 import { Dashboard, Game, Home, Message, Scores, SignIn } from "../pages";
@@ -32,13 +31,7 @@ let index: RouteObject[] = [
 const AppRouter: FC = () => {
   let element = useRoutes(index);
 
-  return (
-    <Suspense fallback={<></>}>
-      <AnimatePresence exitBeforeEnter initial={false}>
-        {element}
-      </AnimatePresence>
-    </Suspense>
-  );
+  return <Suspense fallback={<></>}>{element}</Suspense>;
 };
 
 export default AppRouter;

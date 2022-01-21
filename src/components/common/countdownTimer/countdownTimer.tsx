@@ -1,4 +1,4 @@
-import React, { Fragment, FC } from "react";
+import React, { FC } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import { CountdownTimerViewModal } from "./countdownTimerViewModal";
@@ -8,7 +8,7 @@ import "./styles/_countdownTimerStyles.scss";
  * Countdown Timer
  */
 const CountdownTimer: FC = () => {
-  const { gameState, motionSettings } = CountdownTimerViewModal();
+  const { motionSettings } = CountdownTimerViewModal();
 
   const Numbers = () => (
     <div className="countdown__timer countdown-timer">
@@ -38,8 +38,6 @@ const CountdownTimer: FC = () => {
       <div className="countdown__container">{children}</div>
     </motion.div>
   );
-
-  console.log(`MODAL_RENDER`);
 
   return createPortal(
     <Container>

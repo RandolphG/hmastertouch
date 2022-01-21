@@ -4,7 +4,6 @@ import { fetchQuote } from "../../../services";
 import {
   requestResetGameAction,
   requestSetGameStateAction,
-  requestShowModalAction,
   selectSystemState,
 } from "../../../state-mgmt";
 import { results } from "./types";
@@ -15,8 +14,7 @@ export const ModalViewModal = () => {
     gameState,
     guesses,
     errors,
-    timer: { duration },
-    showModal,
+    timer: { elapsedTime },
   } = useSelector(selectSystemState);
 
   const [showResults, setShowResults] = useState<boolean>(true);
@@ -28,25 +26,21 @@ export const ModalViewModal = () => {
   };
 
   const results: results = [
-    { info: "Time", value: `${(duration / 1000).toFixed(1)}s` },
+    { info: "Time", value: `${(Number(elapsedTime) / 1000).toFixed(1)}s` },
     { info: "Errors", value: errors },
     { info: "Guesses", value: guesses },
   ];
 
-  function toggleModal() {
-    dispatch(requestShowModalAction(!showModal));
-  }
-
   useEffect(() => {
-    fetchQuote(dispatch);
-    dispatch(requestResetGameAction(""));
+    // fetchQuote(dispatch);
+    // dispatch(requestResetGameAction(""));
     if (gameState !== "INITIAL") {
-      let interval = setTimeout(() => {
+      /*let interval = setTimeout(() => {
         dispatch(requestSetGameStateAction("INITIAL"));
-      }, 3000);
+      }, 5000);*/
 
       return () => {
-        clearTimeout(interval);
+        // clearTimeout(interval);
       };
     }
   }, []);
@@ -56,9 +50,7 @@ export const ModalViewModal = () => {
     gameState,
     results,
     motionSettings,
-    showModal,
     showResults,
     setShowResults,
-    toggleModal,
   };
 };

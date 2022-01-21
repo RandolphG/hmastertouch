@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getNotifications,
   requestRemoveNotification,
+  selectSystemState,
 } from "../../../state-mgmt";
 
 export const NotificationViewModel = () => {
   const dispatch = useDispatch();
-  const notifications = useSelector(getNotifications);
+  const { notifications } = useSelector(selectSystemState);
 
   function remove(id: string) {
     setTimeout(() => {

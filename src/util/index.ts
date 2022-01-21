@@ -1,4 +1,5 @@
 import { CalculateScoreProps } from "./types";
+import { Notification } from "../state-mgmt";
 
 /**
  * Calculates the score of a given quote.
@@ -33,3 +34,29 @@ export function findUniqueLettersInString(quote: string) {
     return acc.includes(curr) ? acc : acc + curr;
   }, "");
 }
+
+/* remove notification from array */
+export const remove = (arr: Notification[], item: Notification) => {
+  const notificationsArray = [...arr];
+  notificationsArray.splice(
+    notificationsArray.findIndex((notification) => notification === item),
+    1
+  );
+
+  return notificationsArray;
+};
+
+/* add notification to array */
+export const add = (arr: Notification[], message: Notification) => {
+  console.log(`array: `, arr);
+  console.log(`typeof array: `, typeof arr);
+  return [...arr, { message }];
+};
+
+export const contains = (original: Notification[], filter: Notification[]) => {
+  const res = filter.map((item: Notification) => {
+    return original.includes(item);
+  });
+
+  return !res.includes(false);
+};

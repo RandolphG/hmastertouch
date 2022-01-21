@@ -1,4 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit";
+import { add, remove } from "../../../util";
 
 import {
   gameState,
@@ -28,8 +29,14 @@ export const reducers = {
   requestResetGameAction: (state: ISystemState) => {
     return {
       ...state,
+      gameState: "INITIAL",
+      countdownTimer: false,
       selectedLetters: [],
-      quote: {
+      score: 0,
+      correct: 0,
+      errors: 0,
+      guesses: 0,
+      api: {
         author: "",
         content: "",
         uniqueCharacters: "",
@@ -38,17 +45,15 @@ export const reducers = {
         tags: [],
         _id: "",
       },
-      loading: false,
-      errors: 0,
-      correct: 0,
-      guesses: 0,
       timer: {
         startTime: 0,
         endTime: 0,
         running: false,
-        duration: 0,
+        elapsedTime: 0,
       },
+      buttonId: 1,
       highScores: [],
+      notifications: [],
     };
   },
   requestIncreaseGuessesAction: (
@@ -89,7 +94,6 @@ export const reducers = {
       };
     }
   },
-
   requestStopTimer: (state: ISystemState, action?: PayloadAction) => {
     const { running, startTime } = state.timer;
 
@@ -97,7 +101,11 @@ export const reducers = {
       console.log("its already stopped");
     } else {
       const endTime = Date.now();
-      const duration = endTime - startTime;
+      const elapsedTime = endTime - startTime;
+
+      console.log(`START TIME`, startTime);
+      console.log(`END TIME`, endTime);
+      console.log(`ELAPSED TIME`, elapsedTime);
 
       return {
         ...state,
@@ -105,7 +113,7 @@ export const reducers = {
           ...state.timer,
           running: false,
           endTime,
-          duration,
+          elapsedTime,
         },
       };
     }
@@ -118,7 +126,7 @@ export const reducers = {
         running: false,
         startTime: 0,
         endTime: 0,
-        duration: 0,
+        elapsedTime: 0,
       },
     };
   },
@@ -144,6 +152,28 @@ export const reducers = {
     return {
       ...state,
       gameState: action.payload,
+    };
+  },
+  requestAddNotification: (
+    state: ISystemState,
+    action: PayloadAction<{ title: string }>
+  ) => {
+    const { title } = action.payload;
+
+    return {
+      ...state,
+      notifications: add(state.notifications, title),
+    };
+  },
+  requestRemoveNotification: (
+    state: ISystemState,
+    action: PayloadAction<Notification>
+  ) => {
+    const { title } = action.payload;
+
+    return {
+      ...state,
+      notifications: remove(state.notifications, title),
     };
   },
 };

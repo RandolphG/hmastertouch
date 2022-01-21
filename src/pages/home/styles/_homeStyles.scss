@@ -3,7 +3,6 @@
 .home {
   font-family: $font-main;
   box-sizing: border-box;
-  //border: #ee7752 1px solid;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,7 +12,7 @@
 
   &_container {
     box-sizing: border-box;
-    border: #23d5ab 1px solid;
+    border: white 1px solid;
     display: flex;
     flex-direction: column;
     justify-content: center;

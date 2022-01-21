@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { requestResetGameAction, selectSystemState } from "../../state-mgmt";
-import { buttons } from "./types";
+import { navigationLinks } from "./types";
 
 export const DashboardViewModel = () => {
   let navigate = useNavigate();
@@ -14,23 +14,22 @@ export const DashboardViewModel = () => {
   }, []);
 
   const reset = useCallback(() => {
-    navigate("/");
     dispatch(requestResetGameAction(""));
+    navigate("/");
   }, []);
 
-  const buttons: buttons = [
-    { title: `Home`, location: "/", onClick: reset },
-    { title: `Game`, location: "/dashboard", onClick: () => navigateTo("") },
+  const navigationLinks: navigationLinks = [
+    { link: `Home`, onClick: reset },
+    { link: `Game`, onClick: () => navigateTo("") },
     {
-      title: `High Scores`,
-      location: "dashboard/dashboard/scores",
+      link: `High Scores`,
       onClick: () => navigateTo("scores"),
     },
   ];
 
   return {
     navigate,
-    buttons,
+    navigationLinks,
     gameState,
   };
 };

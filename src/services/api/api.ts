@@ -25,6 +25,8 @@ export const fetchQuote = (dispatch: any) => {
       const uniqueCharacters = findUniqueLettersInString(quote);
       const uniqueCharactersLength = findUniqueLettersInString(quote).length;
 
+      console.log(`UNIQUE CHARACTERS: API ->`, uniqueCharacters);
+
       dispatch(
         requestSetQuoteAction({
           author,
@@ -69,7 +71,6 @@ export const getHighScores = (dispatch: any) => {
       const { data } = response;
 
       dispatch(requestSetHighScores(data));
-      dispatch(requestAddNotification({ title: "Success" }));
     })
     .catch((error) => {
       dispatch(requestAddNotification({ title: "Error with getting scores" }));

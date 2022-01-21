@@ -16,6 +16,7 @@ $layoutPadding-large: 2.5rem;
 }
 
 .board__content-item {
+  cursor: grab;
   flex-shrink: 0;
   display: grid;
   /*place-items: center;*/
@@ -27,6 +28,10 @@ $layoutPadding-large: 2.5rem;
 
   @media (min-width: $breakpoint) {
     padding: 0 $layoutPadding-large;
+  }
+
+  &:active{
+    cursor: grabbing;
   }
 }
 

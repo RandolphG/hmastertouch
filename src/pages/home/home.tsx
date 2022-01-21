@@ -11,8 +11,6 @@ import "./styles/_homeStyles.scss";
 const Home: FC = () => {
   const { buttonOptions, system, motionSettings } = HomeViewModel();
 
-  const Title = () => <div className="home_container_max_title" />;
-
   const button = buttonOptions.map((buttonOption, index) =>
     system.buttonId === buttonOption.id ? (
       <button
@@ -33,7 +31,6 @@ const Home: FC = () => {
     <motion.div className="home" key="home">
       <motion.div className="home_container" {...motionSettings}>
         <div className="home_container_max">
-          <Title />
           <Logo />
           {/*TODO remove routing */}
           <AnimatePresence exitBeforeEnter>

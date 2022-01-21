@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchQuote } from "../../services";
 import {
+  requestResetGameAction,
   requestSetButtonId,
   requestSetGameStateAction,
-  requestStartTimer,
   selectSystemState,
 } from "../../state-mgmt";
 
@@ -17,6 +17,7 @@ export const HomeViewModel = () => {
   const dispatch = useDispatch();
 
   function navigateTo() {
+    fetchQuote(dispatch);
     dispatch(requestSetButtonId(2));
     navigate("/signIn");
   }
@@ -25,7 +26,6 @@ export const HomeViewModel = () => {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
     event.preventDefault();
-    dispatch(requestStartTimer(undefined));
     navigate("/dashboard");
   }
 
@@ -58,8 +58,8 @@ export const HomeViewModel = () => {
   };
 
   useEffect((): void => {
+    dispatch(requestResetGameAction(""));
     dispatch(requestSetGameStateAction("INITIAL"));
-    fetchQuote(dispatch);
   }, [dispatch]);
 
   return { buttonOptions, system, motionSettings };

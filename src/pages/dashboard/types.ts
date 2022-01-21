@@ -1,11 +1,6 @@
-export type buttons = {
-  title: string;
-  location: string;
-  onClick: () => void;
-}[];
+export type navigationLinks = link[];
 
-export type button = {
-  title: string;
-  location: string;
+export type link = {
+  link: string;
   onClick: () => void;
 };
