@@ -6,12 +6,11 @@ import { RandomCharacterAnimation } from "./randomCharacterAnimation";
  * TextEffect
  */
 const TextEffect = ({ score }: { score: number }) => {
+  let title = new RandomCharacterAnimation({
+    d_element: ".random",
+    d_kerning: 8000,
+  });
   useEffect(() => {
-    let title = new RandomCharacterAnimation({
-      d_element: ".random",
-      d_kerning: 8000,
-    });
-
     title.start();
   }, []);
 

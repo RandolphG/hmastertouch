@@ -25,8 +25,6 @@ export const fetchQuote = (dispatch: any) => {
       const uniqueCharacters = findUniqueLettersInString(quote);
       const uniqueCharactersLength = findUniqueLettersInString(quote).length;
 
-      console.log(`UNIQUE CHARACTERS: API ->`, uniqueCharacters);
-
       dispatch(
         requestSetQuoteAction({
           author,

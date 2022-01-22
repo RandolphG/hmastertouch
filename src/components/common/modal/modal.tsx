@@ -1,7 +1,5 @@
 import { motion } from "framer-motion";
-import React, { ReactChild, ReactFragment, ReactPortal } from "react";
-import { createPortal } from "react-dom";
-import { TextEffect } from "./components";
+import React, { memo, ReactChild, ReactFragment, ReactPortal } from "react";
 import { ModalViewModal } from "./modalViewModal";
 import "./styles/_modalStyles.scss";
 
@@ -16,9 +14,8 @@ type ReactNode =
 /**
  * Modal for results
  */
-const Modal = () => {
+const Modal = memo(() => {
   const { score, motionSettings, results } = ModalViewModal();
-  console.log(`type of score`, typeof score);
 
   /* element container */
   const Container = ({ children }: any) => (
@@ -40,7 +37,8 @@ const Modal = () => {
   /* calculated game score */
   const Score = () => (
     <div className="results_container_elementContainer_score">
-      <TextEffect score={score} />
+      {/*<TextEffect score={score} />*/}
+      {score}
     </div>
   );
 
@@ -65,7 +63,7 @@ const Modal = () => {
     <button className="results_container_modalButton">Accept</button>
   );
 
-  return createPortal(
+  return (
     <Container>
       <Title />
       <ElementContainer>
@@ -73,9 +71,8 @@ const Modal = () => {
         <Details />
       </ElementContainer>
       <Button />
-    </Container>,
-    document.getElementById("modal")!
+    </Container>
   );
-};
+});
 
 export default Modal;

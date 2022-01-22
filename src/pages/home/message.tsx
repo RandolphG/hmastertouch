@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
-import "./styles/_homeStyles.scss";
 import { useDispatch } from "react-redux";
-import { MessageText } from "../../components/common/logo/messageText";
 import { requestSetButtonId } from "../../state-mgmt";
 import { motion } from "framer-motion";
+import "./styles/_homeStyles.scss";
 
 /**
  * Message
@@ -15,11 +14,7 @@ const Message = () => {
     dispatch(requestSetButtonId(1));
   }, [dispatch]);
 
-  return (
-    <motion.div className="mainMessage">
-      <MessageText />
-    </motion.div>
-  );
+  return <motion.div className="mainMessage" />;
 };
 
 export default Message;

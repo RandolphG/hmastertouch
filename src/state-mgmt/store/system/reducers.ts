@@ -29,7 +29,6 @@ export const reducers = {
   requestResetGameAction: (state: ISystemState) => {
     return {
       ...state,
-      gameState: "INITIAL",
       countdownTimer: false,
       selectedLetters: [],
       score: 0,
@@ -102,10 +101,6 @@ export const reducers = {
     } else {
       const endTime = Date.now();
       const elapsedTime = endTime - startTime;
-
-      console.log(`START TIME`, startTime);
-      console.log(`END TIME`, endTime);
-      console.log(`ELAPSED TIME`, elapsedTime);
 
       return {
         ...state,

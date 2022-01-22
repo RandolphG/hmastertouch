@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import React from "react";
+import { FlipText } from "../../../../components";
 import { IQuote } from "../../types";
 
 const Quote = ({ quote, selectedLetters }: IQuote) => {
@@ -19,7 +20,11 @@ const Quote = ({ quote, selectedLetters }: IQuote) => {
 
         return (
           <span key={`word-${idx}`} className="word-board-letter">
-            {showLetter ? letter : "_"}
+            {showLetter ? (
+              <FlipText showLetter={showLetter} letter={letter} />
+            ) : (
+              <FlipText showLetter={showLetter} letter={letter} />
+            )}
           </span>
         );
       })}

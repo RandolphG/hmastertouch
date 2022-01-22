@@ -48,8 +48,6 @@ export const remove = (arr: Notification[], item: Notification) => {
 
 /* add notification to array */
 export const add = (arr: Notification[], message: Notification) => {
-  console.log(`array: `, arr);
-  console.log(`typeof array: `, typeof arr);
   return [...arr, { message }];
 };
 

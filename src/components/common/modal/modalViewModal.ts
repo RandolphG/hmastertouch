@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchQuote } from "../../../services";
 import {
   requestResetGameAction,
   requestSetGameStateAction,
@@ -9,6 +8,7 @@ import {
 import { results } from "./types";
 
 export const ModalViewModal = () => {
+  console.log(`RE-RENDER`);
   const {
     score,
     gameState,
@@ -17,7 +17,6 @@ export const ModalViewModal = () => {
     timer: { elapsedTime },
   } = useSelector(selectSystemState);
 
-  const [showResults, setShowResults] = useState<boolean>(true);
   const dispatch = useDispatch();
 
   const motionSettings = {
@@ -32,15 +31,14 @@ export const ModalViewModal = () => {
   ];
 
   useEffect(() => {
-    // fetchQuote(dispatch);
-    // dispatch(requestResetGameAction(""));
     if (gameState !== "INITIAL") {
-      /*let interval = setTimeout(() => {
+      let interval = setTimeout(() => {
+        dispatch(requestResetGameAction(""));
         dispatch(requestSetGameStateAction("INITIAL"));
-      }, 5000);*/
+      }, 5000);
 
       return () => {
-        // clearTimeout(interval);
+        clearTimeout(interval);
       };
     }
   }, []);
@@ -50,7 +48,5 @@ export const ModalViewModal = () => {
     gameState,
     results,
     motionSettings,
-    showResults,
-    setShowResults,
   };
 };

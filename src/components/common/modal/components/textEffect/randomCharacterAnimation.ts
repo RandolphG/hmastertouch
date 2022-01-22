@@ -178,7 +178,7 @@ export class RandomCharacterAnimation {
    * @private
    */
   _generateRandomCharacter = (d_type: string) => {
-    let charType = this.options.d_type;
+    let charType = d_type;
     let elem = document.querySelector(this.options.d_element);
     this.currentChange++;
 

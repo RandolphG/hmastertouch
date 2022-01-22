@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Outlet } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { Logo } from "../../components";
+import { FloatingLogo, Logo } from "../../components";
 import { HomeViewModel } from "./homeViewModel";
 import "./styles/_homeStyles.scss";
 
@@ -31,7 +31,7 @@ const Home: FC = () => {
     <motion.div className="home" key="home">
       <motion.div className="home_container" {...motionSettings}>
         <div className="home_container_max">
-          <Logo />
+          <FloatingLogo />
           {/*TODO remove routing */}
           <AnimatePresence exitBeforeEnter>
             <Outlet />

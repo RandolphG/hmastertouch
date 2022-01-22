@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import "./styles/_logoStyles.scss";
-import { MessageText } from "./messageText";
 
 /**
  * Logo

@@ -1,0 +1,108 @@
+$background: #1d1e1e;
+$chars: "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W",
+"X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u",
+"v", "w", "x", "y", "z";
+
+
+.flipLetter {
+  background-color: #000;
+  border-right: 1px solid $background;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  height: 40px;
+  text-align: center;
+  width: 40px;
+}
+
+.flipLetter::before {
+  background-color: #000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  font-size: 40px;
+  height: 20px;
+  line-height: 40px;
+  overflow: hidden;
+  width: 100%;
+  z-index: 20;
+}
+
+.flipLetter::after {
+  background-color: #000;
+  flex-grow: 0;
+  font-size: 40px;
+  height: 40px;
+  line-height: 40px;
+  margin-top: -50%;
+  overflow: hidden;
+  width: 100%;
+  z-index: 10;
+}
+
+/* Blank letter */
+.flipLetter-blank::before {
+  content: ' ';
+}
+
+.flipLetter-blank::after {
+  content: ' ';
+}
+
+/* dynamic function for character classes */
+@each $char in $chars {
+  .flipLetter-#{$char}::before {
+    content: $char;
+  }
+  .flipLetter-#{$char}::after {
+    content: $char;
+  }
+}
+
+/* Letter animations */
+@for $i from 1 through 50 {
+  .departure-board span:nth-child(#{$i}):before {
+    animation: flip 1s 1 ease-in-out;
+    animation-delay: #{$i/4}s;
+    animation-fill-mode: forwards;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    transition-delay: #{$i/4}s;
+  }
+  .departure-board span:nth-child(#{$i}):after {
+    animation: flip 1s 1 ease-in-out;
+    animation-delay: #{$i/4}s;
+    animation-fill-mode: forwards;
+    backface-visibility: hidden;
+    transition-delay: #{$i/4}s;
+    transform-style: preserve-3d;
+  }
+}
+
+@keyframes flip {
+  0% {
+    color: #000;
+    transform: rotateX(0deg);
+  }
+  20% {
+    content: nth($chars, random(length($chars)));
+    transform: rotateX(360deg);
+  }
+  40% {
+    color: #fff;
+    content: nth($chars, random(length($chars)-1));
+    transform: rotateX(0deg);
+  }
+  60% {
+    color: #fff;
+    content: nth($chars, random(length($chars)-2));
+    transform: rotateX(360deg);
+  }
+  80% {
+    color: #fff;
+    content: nth($chars, random(length($chars)-3));
+    transform: rotateX(0deg);
+  }
+  100% {
+    color: #fff;
+    transform: rotateX(360deg);
+  }
+}
