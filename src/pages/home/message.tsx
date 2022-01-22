@@ -3,6 +3,7 @@ import "./styles/_homeStyles.scss";
 import { useDispatch } from "react-redux";
 import { MessageText } from "../../components/common/logo/messageText";
 import { requestSetButtonId } from "../../state-mgmt";
+import { motion } from "framer-motion";
 
 /**
  * Message
@@ -15,9 +16,9 @@ const Message = () => {
   }, [dispatch]);
 
   return (
-    <div className="message">
+    <motion.div className="mainMessage">
       <MessageText />
-    </div>
+    </motion.div>
   );
 };
 

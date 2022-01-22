@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import React, { ReactChild, ReactFragment, ReactPortal } from "react";
 import { createPortal } from "react-dom";
+import { TextEffect } from "./components";
 import { ModalViewModal } from "./modalViewModal";
 import "./styles/_modalStyles.scss";
 
@@ -17,6 +18,7 @@ type ReactNode =
  */
 const Modal = () => {
   const { score, motionSettings, results } = ModalViewModal();
+  console.log(`type of score`, typeof score);
 
   /* element container */
   const Container = ({ children }: any) => (
@@ -37,7 +39,9 @@ const Modal = () => {
 
   /* calculated game score */
   const Score = () => (
-    <div className="results_container_elementContainer_score">{score}</div>
+    <div className="results_container_elementContainer_score">
+      <TextEffect score={score} />
+    </div>
   );
 
   /* statistic game details */

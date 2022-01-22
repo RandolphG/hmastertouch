@@ -1,19 +1,17 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:600);
-
 .text {
-  border: #e73c7e solid 1px;
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
   font-size: 40px;
-  position: absolute;
-  width: 450px;
-  left: 50%;
-  margin-left: -225px;
-  height: 40px;
-  top: 50%;
-  margin-top: -20px;
+  //position: absolute;
+  width: 100%;
+  //left: 50%;
+  //margin-left: -225px;
+  //height: 40px;
+  //top: 50%;
+  //margin-top: -20px;
+  display: flex;
 
-  p {
+  .message {
     display: inline-block;
     vertical-align: top;
     margin: 0;
@@ -21,7 +19,7 @@
 
   .word {
     position: absolute;
-    width: 220px;
+    width: fit-content;
     opacity: 0;
   }
 
