@@ -1,7 +1,7 @@
 # *Hang Man*
 
 
-![INTRO](assets/_preview_logo.gif)
+![INTRO](./public/_preview_00.gif)
 
 ### *Technologies* :
 - [*Framer Motion*](https://framer.com/motion/)
