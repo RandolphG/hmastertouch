@@ -1,8 +1,8 @@
-import React, { Fragment, useEffect, useLayoutEffect } from "react";
+import React, { Fragment, useLayoutEffect } from "react";
 import "./styles/_flipTextStyles.scss";
 
 const FlipText = ({ showLetter, letter }: any) => {
-  useLayoutEffect(() => {}, [showLetter, letter]);
+  useLayoutEffect(() => {}, [letter]);
 
   return (
     <Fragment>

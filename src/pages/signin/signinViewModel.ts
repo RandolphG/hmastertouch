@@ -26,7 +26,7 @@ export const SigninViewModel = () => {
     dispatch(requestSetUserNameAction(playerInfo));
 
     return () => {};
-  }, [playerInfo]);
+  }, [playerInfo, dispatch]);
 
   const motionSettings = {
     initial: {

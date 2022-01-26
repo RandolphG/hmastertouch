@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Outlet } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { FloatingLogo, Logo } from "../../components";
+import { FloatingLogo } from "../../components";
 import { HomeViewModel } from "./homeViewModel";
 import "./styles/_homeStyles.scss";
 
@@ -9,10 +9,10 @@ import "./styles/_homeStyles.scss";
  * Home
  */
 const Home: FC = () => {
-  const { buttonOptions, system, motionSettings } = HomeViewModel();
+  const { buttonOptions, buttonId, motionSettings } = HomeViewModel();
 
   const button = buttonOptions.map((buttonOption, index) =>
-    system.buttonId === buttonOption.id ? (
+    buttonId === buttonOption.id ? (
       <button
         key={`button-${index}`}
         className="home_container_max_buttons_button"

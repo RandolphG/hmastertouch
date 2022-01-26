@@ -19,7 +19,6 @@ $layoutPadding-large: 2.5rem;
   cursor: grab;
   flex-shrink: 0;
   display: grid;
-  /*place-items: center;*/
   width: 100%;
   padding: 0 $layoutPadding;
   transition-property: visibility, opacity, transform;
@@ -30,7 +29,7 @@ $layoutPadding-large: 2.5rem;
     padding: 0 $layoutPadding-large;
   }
 
-  &:active{
+  &:active {
     cursor: grabbing;
   }
 }
@@ -48,7 +47,7 @@ $layoutPadding-large: 2.5rem;
 .score {
   overflow-y: scroll;
   box-sizing: border-box;
-  border: purple 4px solid;
+  //border: purple 4px solid;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,22 +57,21 @@ $layoutPadding-large: 2.5rem;
 
   &_container {
     box-sizing: border-box;
-    border: #e73c7e 1px solid;
+    //border-bottom: #e73c7e 1px solid;
     display: flex;
     flex-direction: column;
     //justify-content: center;
     align-items: center;
-    height: 90%;
+    height: 100%;
     width: 100%;
     //max-width: 900px;
-    padding: 1rem;
+    //padding: 1rem;
     justify-content: flex-start;
 
     &_info {
       font-size: 1.3rem;
       width: 100%;
       padding: 0 2rem;
-      border: #e73c7e 2px solid;
       display: flex;
       justify-content: center;
     }
@@ -84,6 +82,8 @@ $layoutPadding-large: 2.5rem;
   border-collapse: collapse;
   font-variant-numeric: tabular-nums;
 
+  border: #ee7752 1px solid;
+
   tbody tr:not(:first-child) {
     border-top: .125rem solid $borderColor;
   }
@@ -91,7 +91,7 @@ $layoutPadding-large: 2.5rem;
   th {
     color: $color-text-secondary;
     font-weight: $fontWeight-normal;
-    font-size: 1rem;
+    font-size: 1.4rem;
     line-height: 1.5;
     text-align: left;
 
@@ -118,4 +118,19 @@ $layoutPadding-large: 2.5rem;
       text-align: right;
     }
   }
+}
+
+/* hide scrollbar */
+/*
+div::-webkit-scrollbar {
+  display: none;
+}
+*/
+
+/* sticky navigation */
+th {
+  position: sticky;
+  top: 0;
+  background-color: black;
+  color: white;
 }

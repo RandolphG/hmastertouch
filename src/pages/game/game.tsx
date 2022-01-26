@@ -18,6 +18,7 @@ const Game: FC = () => {
     selectedLetters,
     authorMotionSettings,
     newQuote,
+    userName,
   } = GameViewModel();
 
   return (
@@ -26,6 +27,7 @@ const Game: FC = () => {
         {gameState === "PLAYING" && (
           <motion.div className="hang-man-game">
             <div className="dashboard_container_max_info">
+              {userName}
               {info.map((info: any, idx: number) => (
                 <motion.div
                   key={`info-${idx}`}

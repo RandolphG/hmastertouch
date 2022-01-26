@@ -4,9 +4,8 @@ import {
   requestAddNotification,
   requestSetHighScores,
   requestSetQuoteAction,
-  requestStartTimer,
 } from "../../state-mgmt/";
-import { findUniqueLettersInString } from "../../util";
+import { calculateScore, findUniqueLettersInString } from "../../util";
 import { data } from "./types";
 
 const url = process.env.REACT_APP_GET_URL;
@@ -14,8 +13,6 @@ const postUrl = process.env.REACT_APP_POST_URL;
 
 /* fetch quote info */
 export const fetchQuote = (dispatch: any) => {
-  dispatch(requestStartTimer(undefined));
-
   axios
     .get(url!)
     .then((response) => {
@@ -68,7 +65,23 @@ export const getHighScores = (dispatch: any) => {
     .then((response) => {
       const { data } = response;
 
-      dispatch(requestSetHighScores(data));
+      const premiumScore = data.map((obj: any) => {
+        return {
+          ...obj,
+          score: calculateScore(
+            obj.length,
+            obj.uniqueCharacters,
+            obj.errors,
+            obj.duration
+          ),
+        };
+      });
+
+      const sortedPremiumScore = premiumScore.sort((a: any, b: any) => {
+        return b.score - a.score;
+      });
+
+      dispatch(requestSetHighScores(sortedPremiumScore));
     })
     .catch((error) => {
       dispatch(requestAddNotification({ title: "Error with getting scores" }));

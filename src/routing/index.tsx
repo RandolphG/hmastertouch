@@ -1,6 +1,5 @@
 import React, { FC, Suspense } from "react";
 import { RouteObject, useRoutes } from "react-router-dom";
-import { FlipText } from "../components";
 import { Dashboard, Game, Home, Message, Scores, SignIn } from "../pages";
 
 let index: RouteObject[] = [

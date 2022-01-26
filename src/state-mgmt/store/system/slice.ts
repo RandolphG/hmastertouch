@@ -22,11 +22,11 @@ export const {
   requestStartTimer,
   requestSetHighScores,
   requestSetButtonId,
-  requestShowModalAction,
   requestSetGameStateAction,
   requestSetScore,
   requestRemoveNotification,
   requestAddNotification,
+  requestAddToFavoritesAction,
 } = systemSlice.actions;
 
 export default systemSlice.reducer;

@@ -36,14 +36,16 @@ const Dashboard = () => {
       <AnimatePresence exitBeforeEnter>
         {gameState === "FINISHED" && <Modal />}
         {gameState === "INITIAL" && <CountdownTimer />}
-        <motion.div key={`dashboard`} className="dashboard">
-          <div className="dashboard_container">
-            <div className="dashboard_container_max">
-              <Links />
-              <Outlet />
+        {gameState === "PLAYING" && (
+          <motion.div key={`dashboard`} className="dashboard">
+            <div className="dashboard_container">
+              <div className="dashboard_container_max">
+                <Links />
+                <Outlet />
+              </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        )}
       </AnimatePresence>
     </Fragment>
   );

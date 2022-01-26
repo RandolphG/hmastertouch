@@ -31,6 +31,7 @@ export const reducers = {
       ...state,
       countdownTimer: false,
       selectedLetters: [],
+      favorites: [],
       score: 0,
       correct: 0,
       errors: 0,
@@ -131,15 +132,6 @@ export const reducers = {
       buttonId: action.payload,
     };
   },
-  requestShowModalAction: (
-    state: ISystemState,
-    action: PayloadAction<boolean>
-  ) => {
-    return {
-      ...state,
-      showModal: action.payload,
-    };
-  },
   requestSetGameStateAction: (
     state: ISystemState,
     action: PayloadAction<gameState>
@@ -169,6 +161,15 @@ export const reducers = {
     return {
       ...state,
       notifications: remove(state.notifications, title),
+    };
+  },
+  requestAddToFavoritesAction: (
+    state: ISystemState,
+    action: PayloadAction<string>
+  ) => {
+    return {
+      ...state,
+      favorites: add(state.favorites, action.payload),
     };
   },
 };

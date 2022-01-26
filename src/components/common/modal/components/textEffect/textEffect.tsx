@@ -12,7 +12,7 @@ const TextEffect = ({ score }: { score: number }) => {
   });
   useEffect(() => {
     title.start();
-  }, []);
+  }, [title]);
 
   return (
     <Fragment>

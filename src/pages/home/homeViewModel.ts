@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchQuote } from "../../services";
 import {
+  requestAddNotification,
   requestResetGameAction,
   requestSetButtonId,
   requestSetGameStateAction,
@@ -12,7 +13,7 @@ import {
 import { ButtonOptions } from "./types";
 
 export const HomeViewModel = () => {
-  const system = useSelector(selectSystemState);
+  const { buttonId, userName } = useSelector(selectSystemState);
   let navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -26,7 +27,12 @@ export const HomeViewModel = () => {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
     event.preventDefault();
-    navigate("/dashboard");
+    if (userName.length < 3) {
+      dispatch(requestAddNotification({ title: "Username too short" }));
+      return;
+    } else {
+      navigate("/dashboard");
+    }
   }
 
   const buttonOptions: ButtonOptions = [
@@ -62,5 +68,5 @@ export const HomeViewModel = () => {
     dispatch(requestSetGameStateAction("INITIAL"));
   }, [dispatch]);
 
-  return { buttonOptions, system, motionSettings };
+  return { buttonOptions, buttonId, motionSettings };
 };

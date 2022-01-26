@@ -4,6 +4,7 @@ export const initialState: ISystemState = {
   gameState: "INITIAL",
   countdownTimer: false,
   selectedLetters: [],
+  favorites: [],
   userName: "",
   score: 0,
   alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""),

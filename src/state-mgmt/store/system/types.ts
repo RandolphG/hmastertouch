@@ -1,10 +1,11 @@
 export interface ISystemState {
   gameState: gameState;
   countdownTimer: boolean;
+  selectedLetters: string[];
+  favorites: any;
   userName: string;
   score: number;
   alphabet: string[];
-  selectedLetters: string[];
   correct: number;
   errors: number;
   guesses: number;
@@ -38,7 +39,12 @@ export interface Timer {
 
 export type Letter = string;
 
-export type gameState = "INITIAL" | "PLAYING" | "PAUSED" | "FINISHED";
+export type gameState =
+  | "INITIAL"
+  | "COUNTDOWN"
+  | "PLAYING"
+  | "PAUSED"
+  | "FINISHED";
 
 export interface INotificationsPayload {
   title: Notification;

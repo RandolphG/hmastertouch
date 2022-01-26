@@ -139,28 +139,28 @@ export const GameViewModel = () => {
 
       handleGameComplete(matchWholeWord);
     },
-    []
+    [uniqueCharacters]
   );
 
   useEffect(() => {
     dispatch(requestSetButtonId(1));
     dispatch(requestStartTimer(undefined));
-  }, []);
+  }, [dispatch]);
 
   return {
+    ErrorBoundary,
+    requestResetGameAction,
+    dispatch,
+    newQuote,
     userName,
     info,
     gameState,
     handleSelectLetter,
-    ErrorBoundary,
-    requestResetGameAction,
-    dispatch,
     navigate,
     motionSettings,
     author,
     quote,
     selectedLetters,
     authorMotionSettings,
-    newQuote,
   };
 };

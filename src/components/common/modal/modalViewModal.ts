@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  requestAddToFavoritesAction,
   requestResetGameAction,
   requestSetGameStateAction,
   selectSystemState,
@@ -15,7 +16,9 @@ export const ModalViewModal = () => {
     guesses,
     errors,
     timer: { elapsedTime },
+    api: { quote, author },
   } = useSelector(selectSystemState);
+  let interval: NodeJS.Timer;
 
   const dispatch = useDispatch();
 
@@ -30,20 +33,33 @@ export const ModalViewModal = () => {
     { info: "Guesses", value: guesses },
   ];
 
-  useEffect(() => {
+  const addToFavorites = useCallback(
+    (quote: string) => {
+      dispatch(requestAddToFavoritesAction(quote));
+    },
+    [dispatch]
+  );
+
+  const nextQuote = useCallback(() => {
     if (gameState !== "INITIAL") {
-      let interval = setTimeout(() => {
+      interval = setTimeout(() => {
         dispatch(requestResetGameAction(""));
         dispatch(requestSetGameStateAction("INITIAL"));
-      }, 5000);
-
-      return () => {
-        clearTimeout(interval);
-      };
+      }, 1000);
     }
+  }, [gameState, dispatch]);
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(interval);
+    };
   }, []);
 
   return {
+    nextQuote,
+    addToFavorites,
+    quote,
+    author,
     score,
     gameState,
     results,

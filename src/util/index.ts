@@ -36,7 +36,7 @@ export function findUniqueLettersInString(quote: string) {
 }
 
 /* remove notification from array */
-export const remove = (arr: Notification[], item: Notification) => {
+export const remove = (arr: string[], item: string) => {
   const notificationsArray = [...arr];
   notificationsArray.splice(
     notificationsArray.findIndex((notification) => notification === item),
@@ -47,14 +47,28 @@ export const remove = (arr: Notification[], item: Notification) => {
 };
 
 /* add notification to array */
-export const add = (arr: Notification[], message: Notification) => {
+export const add = (arr: string[], message: string) => {
   return [...arr, { message }];
 };
 
+/* check to see if elements exist in array */
 export const contains = (original: Notification[], filter: Notification[]) => {
   const res = filter.map((item: Notification) => {
     return original.includes(item);
   });
 
   return !res.includes(false);
+};
+
+export const determineScore = (highScores: any) => {
+  highScores.map((obj: any) => {
+    return { ...obj, score: parseInt((100 / (1 + obj.errors)).toFixed()) };
+  });
+};
+
+/* sort scores alphabetically */
+export const sort = (scores: any[]) => {
+  scores.sort((a, b) => {
+    return b.score - a.score;
+  });
 };

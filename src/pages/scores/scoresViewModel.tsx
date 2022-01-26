@@ -1,26 +1,18 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getHighScores } from "../../services";
 import { selectSystemState } from "../../state-mgmt";
 
 export const ScoresViewModel = () => {
-  const system = useSelector(selectSystemState);
+  const { highScores } = useSelector(selectSystemState);
   let navigate = useNavigate();
-
-  const dispatch = useDispatch();
-
-  const calculateScore = system.highScores.map((obj) => {
-    return { ...obj, score: parseInt((100 / (1 + obj.errors)).toFixed()) };
-  });
-
-  const sortedHighScore = calculateScore.sort(function (a, b) {
-    return b.score - a.score;
-  });
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    getHighScores(dispatch);
-  }, [dispatch]);
+    if (null !== containerRef.current) {
+      // containerRef.current.innerText = "Hello world!";
+    }
+  }, []);
 
-  return { system, navigate, sortedHighScore };
+  return { navigate, highScores, containerRef };
 };
