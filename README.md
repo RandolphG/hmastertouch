@@ -23,7 +23,7 @@ $ yarn or npm i
 $ yarn start or npm start
 ```
 
-###*Testing with Jest*
+## *Testing with Jest*
 - install jest
 - navigate to project root folder
 - run jest
