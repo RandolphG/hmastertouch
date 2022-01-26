@@ -25,15 +25,31 @@ $ yarn or npm i
 $ yarn start or npm start
 ```
 
+### *Testing with Jest* :
+- install jest
+- navigate to project root folder
+- run jest
+
+
+```bash
+$ yarn add -global jest
+$ cd project folder
+$ jest
+```
+
 ## *Application Sections*
 
-And here is an example:
-
-
-Application is split mainly in four parts.
+Application is split mainly in three parts.
+- Home
 - Dashboard
-- Match Statistics
-- Leaderboard
+  - Game
+  - Leaderboard
+
+
+## *ISSUES*
+- Resolve re-rendering of results modal.
+- Typescript issues.
+- Add players score to leaderboard.
 
 
 
