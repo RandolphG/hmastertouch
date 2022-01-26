@@ -19,7 +19,7 @@
 
 
 ```bash
-$ git clone https://github.com/RandolphG/hangman.git
+$ git clone https://github.com/RandolphG/hmastertouch
 $ cd project folder
 $ yarn or npm i
 $ yarn start or npm start
