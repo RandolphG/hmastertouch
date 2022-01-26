@@ -1,6 +1,5 @@
 # *Hang Man*
 
-
 ![INTRO](./public/_preview_00.gif)
 
 ### *Technologies* :
@@ -17,7 +16,6 @@
 - install all dependencies with yarn or npm i
 - run with yarn start or npm
 
-
 ```bash
 $ git clone https://github.com/RandolphG/hmastertouch
 $ cd project folder
@@ -25,11 +23,10 @@ $ yarn or npm i
 $ yarn start or npm start
 ```
 
-### *Testing with Jest* :
+###*Testing with Jest*
 - install jest
 - navigate to project root folder
 - run jest
-
 
 ```bash
 $ yarn add -global jest
@@ -45,12 +42,7 @@ Application is split mainly in three parts.
   - Game
   - Leaderboard
 
-
 ## *ISSUES*
 - Resolve re-rendering of results modal.
 - Typescript issues.
 - Add players score to leaderboard.
-
-
-
-
