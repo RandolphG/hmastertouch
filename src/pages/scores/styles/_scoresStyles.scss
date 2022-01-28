@@ -47,7 +47,6 @@ $layoutPadding-large: 2.5rem;
 .score {
   overflow-y: scroll;
   box-sizing: border-box;
-  //border: purple 4px solid;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,15 +56,11 @@ $layoutPadding-large: 2.5rem;
 
   &_container {
     box-sizing: border-box;
-    //border-bottom: #e73c7e 1px solid;
     display: flex;
     flex-direction: column;
-    //justify-content: center;
     align-items: center;
     height: 100%;
     width: 100%;
-    //max-width: 900px;
-    //padding: 1rem;
     justify-content: flex-start;
 
     &_info {
@@ -81,7 +76,6 @@ $layoutPadding-large: 2.5rem;
 .leaderboard {
   border-collapse: collapse;
   font-variant-numeric: tabular-nums;
-
   border: #ee7752 1px solid;
 
   tbody tr:not(:first-child) {

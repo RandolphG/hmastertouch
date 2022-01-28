@@ -1,5 +1,5 @@
 # *Hang Man*
-
+*Interactive guessing game of notable quotes*
 ![INTRO](./public/_preview_00.gif)
 
 ### *Technologies* :

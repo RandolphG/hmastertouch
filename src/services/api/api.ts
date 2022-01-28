@@ -10,6 +10,7 @@ import { data } from "./types";
 
 const url = process.env.REACT_APP_GET_URL;
 const postUrl = process.env.REACT_APP_POST_URL;
+const quotesUrl = process.env.REACT_APP_GET_QUOTES;
 
 /* fetch quote info */
 export const fetchQuote = (dispatch: any) => {
@@ -77,12 +78,45 @@ export const getHighScores = (dispatch: any) => {
         };
       });
 
+      /*      const premium = premiumScore.map((obj: any) => {
+        const result = getQuotes(dispatch, obj.quoteId);
+        console.log(`QUOTE_ID -->`, result);
+        // }
+        /!*return {
+          ...obj,
+          quote: ,
+        };*!/
+      });
+
+      console.log(`premium -->`, premium);*/
+
       const sortedPremiumScore = premiumScore.sort((a: any, b: any) => {
         return b.score - a.score;
       });
 
       dispatch(requestSetHighScores(sortedPremiumScore));
     })
+    .catch((error) => {
+      dispatch(requestAddNotification({ title: "Error with getting scores" }));
+      console.log("Error :", error);
+    });
+};
+
+/* get quotes */
+export const getQuotes = async (dispatch: any, quoteId: string) => {
+  await axios
+    .get(`${quotesUrl}${quoteId}`)
+    .then(async (response) => {
+      let results: string[];
+
+      await response.data.results.map(async (items: any) => {
+        if (items._id === quoteId) {
+          console.log(`CONTENT -->`, items.content);
+          // results.push(items.content);
+        }
+      });
+    })
+
     .catch((error) => {
       dispatch(requestAddNotification({ title: "Error with getting scores" }));
       console.log("Error :", error);

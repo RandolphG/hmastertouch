@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchQuote } from "../../services";
+import { fetchQuote, getHighScores } from "../../services";
 import {
+  selectSystemState,
   requestAddNotification,
   requestResetGameAction,
   requestSetButtonId,
   requestSetGameStateAction,
-  selectSystemState,
 } from "../../state-mgmt";
 
 import { ButtonOptions } from "./types";
@@ -66,6 +66,7 @@ export const HomeViewModel = () => {
   useEffect((): void => {
     dispatch(requestResetGameAction(""));
     dispatch(requestSetGameStateAction("INITIAL"));
+    getHighScores(dispatch);
   }, [dispatch]);
 
   return { buttonOptions, buttonId, motionSettings };

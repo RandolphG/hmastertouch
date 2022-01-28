@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchQuote, getHighScores } from "../../../services";
+import { fetchQuote } from "../../../services";
 import {
   requestSetGameStateAction,
   selectSystemState,
@@ -12,7 +12,6 @@ export const CountdownTimerViewModal = () => {
 
   useEffect(() => {
     let interval = setTimeout(() => {
-      getHighScores(dispatch);
       fetchQuote(dispatch);
       dispatch(requestSetGameStateAction("PLAYING"));
     }, 5000);

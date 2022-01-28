@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { ErrorBoundary } from "../../components";
 import { ScoresViewModel } from "./scoresViewModel";
@@ -9,53 +9,7 @@ import "./styles/_scoresStyles.scss";
  * Scores
  */
 const Scores = () => {
-  const { highScores, containerRef } = ScoresViewModel();
-
-  let isDown: boolean = false;
-  let startY: number;
-  let scrollTop: number;
-
-  let pos = { top: 0, left: 0, x: 0, y: 0 };
-
-  const mouseDownHandler = function (e) {
-    const pos = {
-      /* The current scroll */
-      left: containerRef.current.scrollLeft,
-      top: containerRef.current.scrollTop,
-      /* Get the current mouse position */
-      x: e.clientX,
-      y: e.clientY,
-    };
-    console.log(`MOUSE DOWN`);
-
-    document.addEventListener("mousemove", mouseMoveHandler);
-    document.addEventListener("mouseup", mouseUpHandler);
-  };
-
-  const mouseMoveHandler = function (e) {
-    /* How far the mouse has been moved */
-    const dx = e.clientX - pos.x;
-    const dy = e.clientY - pos.y;
-
-    /* Change the cursor and prevent user from selecting the text */
-    containerRef.current.style.cursor = "grabbing";
-    containerRef.current.style.userSelect = "none";
-
-    /* Scroll the element */
-    containerRef.current.scrollTop = pos.top - dy;
-    containerRef.current.scrollLeft = pos.left - dx;
-    console.log(`MOUSE MOVE`);
-  };
-
-  const mouseUpHandler = function () {
-    console.log(`MOUSE UP`);
-
-    document.removeEventListener("mousemove", mouseMoveHandler);
-    document.removeEventListener("mouseup", mouseUpHandler);
-
-    containerRef.current.style.cursor = "grab";
-    containerRef.current.style.removeProperty("user-select");
-  };
+  const { highScores, containerRef, motionSettings } = ScoresViewModel();
 
   const Header = () => (
     <thead>
@@ -73,8 +27,7 @@ const Scores = () => {
       {highScores.map((score, idx) => (
         <motion.tr
           key={idx}
-          initial={{ opacity: 0, translateX: 25 }}
-          animate={{ opacity: 1, translateX: 0 }}
+          {...motionSettings}
           transition={{ duration: 0.2, delay: idx * 0.05 }}
         >
           <td>{score.score}</td>
@@ -111,9 +64,6 @@ const Scores = () => {
               flexDirection: "column",
               alignItems: "center",
             }}
-            onMouseMove={mouseMoveHandler}
-            onMouseDown={mouseDownHandler}
-            onMouseUp={mouseUpHandler}
           >
             <Container>
               <Header />

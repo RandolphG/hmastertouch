@@ -31,7 +31,6 @@ export const reducers = {
       ...state,
       countdownTimer: false,
       selectedLetters: [],
-      favorites: [],
       score: 0,
       correct: 0,
       errors: 0,
@@ -52,7 +51,6 @@ export const reducers = {
         elapsedTime: 0,
       },
       buttonId: 1,
-      highScores: [],
       notifications: [],
     };
   },

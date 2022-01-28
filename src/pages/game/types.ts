@@ -34,6 +34,8 @@ export type handleSelectLetterProps = {
 };
 
 export type gameDetails = {
+  id: string;
+  score: number;
   quoteId: string;
   length: number;
   uniqueCharacters: string;

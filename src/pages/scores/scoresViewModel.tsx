@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { selectSystemState } from "../../state-mgmt";
@@ -8,11 +8,10 @@ export const ScoresViewModel = () => {
   let navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (null !== containerRef.current) {
-      // containerRef.current.innerText = "Hello world!";
-    }
-  }, []);
+  const motionSettings = {
+    initial: { opacity: 0, translateX: 25 },
+    animate: { opacity: 1, translateX: 0 },
+  };
 
-  return { navigate, highScores, containerRef };
+  return { navigate, highScores, containerRef, motionSettings };
 };

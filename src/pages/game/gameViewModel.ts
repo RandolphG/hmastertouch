@@ -2,6 +2,7 @@ import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchQuote, setUserHighScore } from "../../services";
+import { v4 as uuid } from "uuid";
 import {
   selectSystemState,
   requestIncreaseCorrectAction,
@@ -94,18 +95,6 @@ export const GameViewModel = () => {
       dispatch(requestStopTimer(undefined));
       dispatch(requestAddNotification({ title: "Game Complete!" }));
 
-      /* game results to post to server */
-      const gameDetails: gameDetails = {
-        quoteId: _id,
-        length,
-        uniqueCharacters,
-        userName,
-        errors,
-        duration: elapsedTime,
-      };
-
-      setUserHighScore(dispatch, gameDetails);
-
       const score = calculateScore(
         length,
         uniqueCharactersLength,
@@ -114,6 +103,20 @@ export const GameViewModel = () => {
       );
 
       dispatch(requestSetScore(score));
+
+      /* game results to post to server */
+      const gameDetails: gameDetails = {
+        id: uuid(),
+        score: Number(score),
+        userName,
+        quoteId: _id,
+        length,
+        uniqueCharacters,
+        errors,
+        duration: elapsedTime,
+      };
+
+      setUserHighScore(dispatch, gameDetails);
       dispatch(requestSetGameStateAction("FINISHED"));
     }
   };

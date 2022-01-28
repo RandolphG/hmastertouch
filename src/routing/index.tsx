@@ -1,6 +1,6 @@
 import React, { FC, Suspense } from "react";
 import { RouteObject, useRoutes } from "react-router-dom";
-import { Dashboard, Game, Home, Message, Scores, SignIn } from "../pages";
+import { Dashboard, Game, Home, Leaderboard, Message, SignIn } from "../pages";
 
 let index: RouteObject[] = [
   {
@@ -18,7 +18,7 @@ let index: RouteObject[] = [
       { index: true, element: <Game /> },
       {
         path: "scores",
-        element: <Scores />,
+        element: <Leaderboard />,
       },
     ],
   },

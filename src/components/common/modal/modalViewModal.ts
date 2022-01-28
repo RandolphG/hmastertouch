@@ -1,22 +1,28 @@
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { v4 as uuid } from "uuid";
+import { gameDetails } from "../../../pages";
 import {
   requestAddToFavoritesAction,
   requestResetGameAction,
   requestSetGameStateAction,
+  requestSetHighScores,
   selectSystemState,
 } from "../../../state-mgmt";
 import { results } from "./types";
 
 export const ModalViewModal = () => {
   console.log(`RE-RENDER`);
+
   const {
+    highScores,
+    userName,
     score,
     gameState,
     guesses,
     errors,
     timer: { elapsedTime },
-    api: { quote, author },
+    api: { quote, author, _id, uniqueCharacters, length },
   } = useSelector(selectSystemState);
   let interval: NodeJS.Timer;
 
@@ -26,6 +32,24 @@ export const ModalViewModal = () => {
     initial: { opacity: 0, translateX: -25 },
     animate: { opacity: 1, translateX: 0 },
   };
+
+  /* game results to post to server */
+  const gameDetails: gameDetails = {
+    id: uuid(),
+    score,
+    userName,
+    quoteId: _id,
+    length,
+    uniqueCharacters,
+    errors,
+    duration: elapsedTime,
+  };
+
+  const newLeaderboard = [...highScores, gameDetails];
+
+  newLeaderboard.sort((a: any, b: any) => {
+    return b.score - a.score;
+  });
 
   const results: results = [
     { info: "Time", value: `${(Number(elapsedTime) / 1000).toFixed(1)}s` },
@@ -44,6 +68,7 @@ export const ModalViewModal = () => {
     if (gameState !== "INITIAL") {
       interval = setTimeout(() => {
         dispatch(requestResetGameAction(""));
+        dispatch(requestSetHighScores(newLeaderboard));
         dispatch(requestSetGameStateAction("INITIAL"));
       }, 1000);
     }
