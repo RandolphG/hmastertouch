@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import React from "react";
 import { FlipText } from "../../../../components";
-import { IQuote } from "../../types";
+import { IQuote } from "../../../../types";
 
 const Quote = ({ quote, selectedLetters }: IQuote) => {
   const containerMotionSettings = {

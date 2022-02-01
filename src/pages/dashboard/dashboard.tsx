@@ -2,14 +2,14 @@ import React, { Fragment } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Outlet } from "react-router-dom";
 import { CountdownTimer, Modal } from "../../components";
-import { DashboardViewModel } from "./dashboardViewModel";
+import { useDashboard } from "./useDashboard";
 import "./styles/_dashboardStyles.scss";
 
 /**
  * Dashboard
  */
 const Dashboard = () => {
-  const { navigationLinks, gameState } = DashboardViewModel();
+  const { navigationLinks, gameState } = useDashboard();
 
   const Links = () => {
     return (

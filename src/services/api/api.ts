@@ -1,12 +1,11 @@
 import axios from "axios";
-import { gameDetails } from "../../pages";
 import {
   requestAddNotification,
   requestSetHighScores,
   requestSetQuoteAction,
 } from "../../state-mgmt/";
 import { calculateScore, findUniqueLettersInString } from "../../util";
-import { data } from "./types";
+import { data, gameDetails } from "../../types";
 
 const url = process.env.REACT_APP_GET_URL;
 const postUrl = process.env.REACT_APP_POST_URL;
@@ -78,7 +77,8 @@ export const getHighScores = (dispatch: any) => {
         };
       });
 
-      /*      const premium = premiumScore.map((obj: any) => {
+      /*
+      const premium = premiumScore.map((obj: any) => {
         const result = getQuotes(dispatch, obj.quoteId);
         console.log(`QUOTE_ID -->`, result);
         // }
@@ -88,7 +88,8 @@ export const getHighScores = (dispatch: any) => {
         };*!/
       });
 
-      console.log(`premium -->`, premium);*/
+      console.log(`premium -->`, premium);
+      */
 
       const sortedPremiumScore = premiumScore.sort((a: any, b: any) => {
         return b.score - a.score;
@@ -107,12 +108,9 @@ export const getQuotes = async (dispatch: any, quoteId: string) => {
   await axios
     .get(`${quotesUrl}${quoteId}`)
     .then(async (response) => {
-      let results: string[];
-
       await response.data.results.map(async (items: any) => {
         if (items._id === quoteId) {
           console.log(`CONTENT -->`, items.content);
-          // results.push(items.content);
         }
       });
     })

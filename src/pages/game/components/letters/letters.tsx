@@ -1,5 +1,5 @@
 import React from "react";
-import { ILetters } from "../../types";
+import { ILetters } from "../../../../types";
 import Letter from "./letter";
 import { LettersViewModel } from "./LettersViewModel";
 

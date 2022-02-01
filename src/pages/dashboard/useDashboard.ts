@@ -2,9 +2,9 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { requestResetGameAction, selectSystemState } from "../../state-mgmt";
-import { navigationLinks } from "./types";
+import { navigationLinks } from "../../types";
 
-export const DashboardViewModel = () => {
+export const useDashboard = () => {
   let navigate = useNavigate();
   const { gameState } = useSelector(selectSystemState);
   const dispatch = useDispatch();

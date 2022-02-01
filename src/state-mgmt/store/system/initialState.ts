@@ -1,4 +1,4 @@
-import { ISystemState } from "./types";
+import { ISystemState } from "../../../types";
 
 export const initialState: ISystemState = {
   gameState: "INITIAL",

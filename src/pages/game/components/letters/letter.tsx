@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import React from "react";
-import { ILetter } from "../../types";
+import { ILetter } from "../../../../types";
 
 const Letter = ({
   letter,

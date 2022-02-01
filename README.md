@@ -1,6 +1,6 @@
 # *Hang Man*
 *Interactive guessing game of notable quotes*
-![INTRO](./public/_preview_00.gif)
+![INTRO](./public/assets/_preview_00.gif)
 
 ### *Technologies* :
 - [*Framer Motion*](https://framer.com/motion/)

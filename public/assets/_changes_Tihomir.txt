@@ -1,0 +1,12 @@
+1. Change all VM to useNAME_OF_COMPONENT
+	a. split up the hooks into reUseful
+2. Move all types to Types folder
+3. Do not put components inside another component
+	a. have them into their own component.
+4. Redux- and caching
+    if you pass a props you can use that in useEffect
+    you can't memorise a selector
+
+    if a component is using state it is called a container
+5. take index utilities and separate into other files names  for what they do
+6. read articles about what should be in redux or not

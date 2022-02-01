@@ -7,7 +7,7 @@ import {
   Api,
   ISystemState,
   Letter,
-} from "./types";
+} from "../../../types";
 
 export const reducers = {
   requestSetScore: (state: ISystemState, action: PayloadAction<number>) => {
@@ -152,7 +152,7 @@ export const reducers = {
   },
   requestRemoveNotification: (
     state: ISystemState,
-    action: PayloadAction<Notification>
+    action: PayloadAction<{ title: string }>
   ) => {
     const { title } = action.payload;
 

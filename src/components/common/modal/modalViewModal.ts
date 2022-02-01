@@ -1,7 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
-import { gameDetails } from "../../../pages";
 import {
   requestAddToFavoritesAction,
   requestResetGameAction,
@@ -9,7 +8,7 @@ import {
   requestSetHighScores,
   selectSystemState,
 } from "../../../state-mgmt";
-import { results } from "./types";
+import { results, gameDetails } from "../../../types";
 
 export const ModalViewModal = () => {
   console.log(`RE-RENDER`);

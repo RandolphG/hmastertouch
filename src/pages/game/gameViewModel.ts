@@ -19,7 +19,7 @@ import {
 } from "../../state-mgmt";
 import { ErrorBoundary } from "../../components";
 import { calculateScore } from "../../util";
-import { gameDetails, handleSelectLetterProps } from "./types";
+import { gameDetails, handleSelectLetterProps } from "../../types";
 
 export const GameViewModel = () => {
   let navigate = useNavigate();

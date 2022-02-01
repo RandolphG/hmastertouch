@@ -3,14 +3,15 @@ import {
   requestRemoveNotification,
   selectSystemState,
 } from "../../../state-mgmt";
+import { Notification } from "../../../types";
 
 export const NotificationViewModel = () => {
   const dispatch = useDispatch();
   const { notifications } = useSelector(selectSystemState);
 
-  function remove(id: string) {
+  function remove(id: Notification) {
     setTimeout(() => {
-      dispatch(requestRemoveNotification(id));
+      dispatch(requestRemoveNotification({ title: id }));
     }, 2500);
   }
 

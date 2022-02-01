@@ -10,7 +10,7 @@ import {
   requestSetGameStateAction,
 } from "../../state-mgmt";
 
-import { ButtonOptions } from "./types";
+import { ButtonOptions } from "../../types";
 
 export const HomeViewModel = () => {
   const { buttonId, userName } = useSelector(selectSystemState);
@@ -64,7 +64,7 @@ export const HomeViewModel = () => {
   };
 
   useEffect((): void => {
-    dispatch(requestResetGameAction(""));
+    dispatch(requestResetGameAction(undefined));
     dispatch(requestSetGameStateAction("INITIAL"));
     getHighScores(dispatch);
   }, [dispatch]);

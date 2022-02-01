@@ -1,5 +1,4 @@
-import { CalculateScoreProps } from "./types";
-import { Notification } from "../state-mgmt";
+import { Notification, CalculateScoreProps } from "../types";
 
 /**
  * Calculates the score of a given quote.
