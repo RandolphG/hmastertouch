@@ -1,6 +1,6 @@
 import React, { FC, Fragment } from "react";
 import { Letters, Stopwatch, Quote } from "./components";
-import { GameViewModel } from "./gameViewModel";
+import { useGame } from "./useGame";
 import { motion } from "framer-motion";
 import "./styles/_gameStyles.scss";
 
@@ -19,7 +19,7 @@ const Game: FC = () => {
     authorMotionSettings,
     newQuote,
     userName,
-  } = GameViewModel();
+  } = useGame();
 
   return (
     <ErrorBoundary>

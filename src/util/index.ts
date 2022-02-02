@@ -71,3 +71,15 @@ export const sort = (scores: any[]) => {
     return b.score - a.score;
   });
 };
+
+/* filter object based on keys
+ * https://stackoverflow.com/questions/38750705/filter-object-properties-by-key-in-es6
+ * */
+export const filterObjectByKey = (key: string, data: any) => {
+  return Object.keys(data)
+    .filter((item) => item.includes(key))
+    .reduce((obj: any, key: any) => {
+      obj[key] = data[key];
+      return obj;
+    }, {});
+};

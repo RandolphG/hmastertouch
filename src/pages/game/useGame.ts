@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchQuote, setUserHighScore } from "../../services";
+import { fetchQuote, postHighScore, setUserHighScore } from "../../services";
 import { v4 as uuid } from "uuid";
 import {
   selectSystemState,
@@ -21,7 +21,7 @@ import { ErrorBoundary } from "../../components";
 import { calculateScore } from "../../util";
 import { gameDetails, handleSelectLetterProps } from "../../types";
 
-export const GameViewModel = () => {
+export const useGame = () => {
   let navigate = useNavigate();
   const {
     gameState,
@@ -104,17 +104,40 @@ export const GameViewModel = () => {
 
       dispatch(requestSetScore(score));
 
+      const highScoreDetails = {
+        query: `
+          mutation {
+            postScore(highScoreInput: {
+              userName: "${userName}",
+              id: "${uuid()}",
+              score: "${Number(score)}",
+              quoteId: "${_id}",
+              length: "${length}",
+              uniqueCharacters: "${uniqueCharacters}",
+              error: "${errors}",
+              duration: "${elapsedTime}",
+          }
+        `,
+      };
+
       /* game results to post to server */
       const gameDetails: gameDetails = {
+        userName,
         id: uuid(),
         score: Number(score),
-        userName,
         quoteId: _id,
         length,
         uniqueCharacters,
         errors,
         duration: elapsedTime,
       };
+
+      console.log(`\ngameDetails -> `, gameDetails);
+      console.log(`\nhighScoreDetails -> `, highScoreDetails);
+
+      postHighScore(highScoreDetails).then((data: any) => {
+        console.log(`DATA : `, data);
+      });
 
       setUserHighScore(dispatch, gameDetails);
       dispatch(requestSetGameStateAction("FINISHED"));

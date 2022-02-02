@@ -7,6 +7,8 @@ import {
 import { calculateScore, findUniqueLettersInString } from "../../util";
 import { data, gameDetails } from "../../types";
 
+/* environment variables */
+const graphqlUrl: string | undefined = process.env.GRAPHQL_URL;
 const url = process.env.REACT_APP_GET_URL;
 const postUrl = process.env.REACT_APP_POST_URL;
 const quotesUrl = process.env.REACT_APP_GET_QUOTES;
@@ -58,6 +60,32 @@ export const setUserHighScore = (dispatch: any, gameDetails: gameDetails) => {
     });
 };
 
+/* post highScore info */
+export const postHighScore = async (requestBody: any) => {
+  await fetch(graphqlUrl!, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(requestBody),
+  })
+    .then((response) => {
+      if (response.status !== 200 && response.status !== 201) {
+        throw new Error("Failed");
+      }
+      console.log(`response`, response);
+      return response.json();
+    })
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((err) => {
+      console.log(err[0]);
+      return err;
+    });
+};
+
 /* get highScore info*/
 export const getHighScores = (dispatch: any) => {
   axios
@@ -76,20 +104,6 @@ export const getHighScores = (dispatch: any) => {
           ),
         };
       });
-
-      /*
-      const premium = premiumScore.map((obj: any) => {
-        const result = getQuotes(dispatch, obj.quoteId);
-        console.log(`QUOTE_ID -->`, result);
-        // }
-        /!*return {
-          ...obj,
-          quote: ,
-        };*!/
-      });
-
-      console.log(`premium -->`, premium);
-      */
 
       const sortedPremiumScore = premiumScore.sort((a: any, b: any) => {
         return b.score - a.score;
