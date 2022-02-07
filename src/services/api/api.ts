@@ -8,7 +8,7 @@ import { calculateScore, findUniqueLettersInString } from "../../util";
 import { data, gameDetails } from "../../types";
 
 /* environment variables */
-const graphqlUrl: string | undefined = process.env.GRAPHQL_URL;
+const graphqlUrl = `http://localhost:8000/graphql`;
 const url = process.env.REACT_APP_GET_URL;
 const postUrl = process.env.REACT_APP_POST_URL;
 const quotesUrl = process.env.REACT_APP_GET_QUOTES;
@@ -45,23 +45,9 @@ export const fetchQuote = (dispatch: any) => {
     });
 };
 
-/* set highScore info */
-export const setUserHighScore = (dispatch: any, gameDetails: gameDetails) => {
-  const config = { headers: { "Content-Type": "application/json" } };
-
-  axios
-    .post(postUrl!, gameDetails, config)
-    .then(() => {
-      dispatch(requestAddNotification({ title: "Score Posted" }));
-    })
-    .catch((error) => {
-      dispatch(requestAddNotification({ title: "Error with posting score" }));
-      console.log("Error :", error);
-    });
-};
-
 /* post highScore info */
 export const postHighScore = async (requestBody: any) => {
+  console.log("requestBody -->", requestBody);
   await fetch(graphqlUrl!, {
     method: "POST",
     headers: {

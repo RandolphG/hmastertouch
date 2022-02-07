@@ -91,5 +91,6 @@
     "nodemon": "nodemon server/app.js",
     "test": "jest"
   },
-  "version": "0.1.0"
+  "version": "0.1.0",
+  "proxy": "http://localhost:8001"
 }

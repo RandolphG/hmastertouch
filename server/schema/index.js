@@ -8,32 +8,33 @@ module.exports = buildSchema(`
         createdAt: String!
     }
     
-    type HighScore {
-        _id: ID!
-        userName: String!
-        id: String!
-        score: Int!
-        quoteId: String!
-        length: Int!
-        uniqueCharacters: String!
-        error: String!
-        duration: Int!
-    }
-        
     input UserInput {
         userName: String!
         password: String!
     }
     
-    type HighScoreInput {
+    type HighScore {
+        _id: ID!
         userName: String!
         id: String!
-        score: Int!
+        score: String!
         quoteId: String!
-        length: Int!
+        length: String!
         uniqueCharacters: String!
-        error: String!
-        duration: Int!
+        mistakes: String!
+        duration: String!
+        createdAt: String!
+    }
+        
+    input HighScoreInput {
+        userName: String!
+        id: String!
+        score: String!
+        quoteId: String!
+        length: String!
+        uniqueCharacters: String!
+        mistakes: String!
+        duration: String!
     }
     
     type AuthData {
@@ -48,8 +49,8 @@ module.exports = buildSchema(`
     }
 
     type Mutation {
-        createUser(userInput:UserInput): User
-        postHighScore(highScoreInput:HighScoreInput): HighScore
+        createUser(input:UserInput): User
+        postScore(input:HighScoreInput): HighScore
     }
 
     schema {

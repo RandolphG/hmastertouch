@@ -30,6 +30,14 @@ const Modal = memo(() => {
       <button
         className="results_container_header_favoriteButton"
         onClick={() => {
+          console.log(`CLicked HighScore`);
+        }}
+      >
+        leaderboard
+      </button>
+      <button
+        className="results_container_header_favoriteButton"
+        onClick={() => {
           addToFavorites(quote);
         }}
       >

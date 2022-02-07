@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchQuote, postHighScore, setUserHighScore } from "../../services";
+import { fetchQuote, postHighScore } from "../../services";
 import { v4 as uuid } from "uuid";
 import {
   selectSystemState,
@@ -22,6 +22,7 @@ import { calculateScore } from "../../util";
 import { gameDetails, handleSelectLetterProps } from "../../types";
 
 export const useGame = () => {
+  /*TODO Add share button to*/
   let navigate = useNavigate();
   const {
     gameState,
@@ -70,7 +71,7 @@ export const useGame = () => {
     transition: { duration: 0.3, delay: 1.3 },
   };
 
-  const info: any = [
+  const stats: any = [
     { title: `Correct`, value: correct, style: "userName" },
     { title: `Guesses`, value: guesses, style: "userName" },
     { title: `Errors`, value: errors, style: "errors" },
@@ -107,15 +108,25 @@ export const useGame = () => {
       const highScoreDetails = {
         query: `
           mutation {
-            postScore(highScoreInput: {
+            postScore(input: {
               userName: "${userName}",
               id: "${uuid()}",
               score: "${Number(score)}",
               quoteId: "${_id}",
               length: "${length}",
               uniqueCharacters: "${uniqueCharacters}",
-              error: "${errors}",
+              mistakes: "${errors}",
               duration: "${elapsedTime}",
+              }) {
+                userName
+                id
+                score
+                quoteId
+                length
+                uniqueCharacters
+                mistakes
+                duration
+              }
           }
         `,
       };
@@ -133,13 +144,11 @@ export const useGame = () => {
       };
 
       console.log(`\ngameDetails -> `, gameDetails);
-      console.log(`\nhighScoreDetails -> `, highScoreDetails);
 
       postHighScore(highScoreDetails).then((data: any) => {
         console.log(`DATA : `, data);
       });
 
-      setUserHighScore(dispatch, gameDetails);
       dispatch(requestSetGameStateAction("FINISHED"));
     }
   };
@@ -179,7 +188,7 @@ export const useGame = () => {
     dispatch,
     newQuote,
     userName,
-    info,
+    stats,
     gameState,
     handleSelectLetter,
     navigate,

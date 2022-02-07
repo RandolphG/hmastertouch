@@ -9,7 +9,7 @@ import "./styles/_gameStyles.scss";
  */
 const Game: FC = () => {
   const {
-    info,
+    stats,
     gameState,
     quote,
     author,
@@ -28,7 +28,7 @@ const Game: FC = () => {
           <motion.div className="hang-man-game">
             <div className="dashboard_container_max_info">
               {userName}
-              {info.map((info: any, idx: number) => (
+              {stats.map((info: any, idx: number) => (
                 <motion.div
                   key={`info-${idx}`}
                   initial={{ opacity: 0, translateY: -15 }}

@@ -11,8 +11,6 @@ import {
 import { results, gameDetails } from "../../../types";
 
 export const ModalViewModal = () => {
-  console.log(`RE-RENDER`);
-
   const {
     highScores,
     userName,

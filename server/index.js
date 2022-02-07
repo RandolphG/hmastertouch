@@ -51,8 +51,10 @@ app.get("*", (request, response) => {
   response.sendFile(path.resolve(__dirname, "build", "index.html"));
 });
 
+const hardcodedUri = `mongodb+srv://nogomet:ASDFGFDSA123@cluster0.f466e.gcp.mongodb.net/test?retryWrites=true&w=majority`;
+
 mongoose
-  .connect(uri, options)
+  .connect(hardcodedUri, options)
   .then((res) => {
     console.log(res);
     app.listen(port, host, function () {

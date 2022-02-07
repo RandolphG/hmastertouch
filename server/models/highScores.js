@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const highScoresSchema = new Schema(
+const highScoreSchema = new Schema(
   {
     userName: {
       type: String,
@@ -28,7 +28,7 @@ const highScoresSchema = new Schema(
       type: String,
       required: true,
     },
-    errors: {
+    mistakes: {
       type: Number,
       required: true,
     },
@@ -40,4 +40,4 @@ const highScoresSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("HighScores", highScoresSchema);
+module.exports = mongoose.model("HighScore", highScoreSchema);

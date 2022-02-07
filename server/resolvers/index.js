@@ -1,7 +1,6 @@
 const User = require("../models/users");
 const HighScore = require("../models/highScores");
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 
 module.exports = {
   createUser: async (user) => {
@@ -39,7 +38,7 @@ module.exports = {
       throw error;
     }
   },
-  postHighScore: async (score) => {
+  postScore: async (score) => {
     console.log(`\npostScore: -->`);
 
     try {
@@ -50,13 +49,32 @@ module.exports = {
         quoteId: score.highScoreInput.quoteId,
         length: score.highScoreInput.length,
         uniqueCharacters: score.highScoreInput.uniqueCharacters,
-        error: score.highScoreInput.error,
+        mistakes: score.highScoreInput.error,
         duration: score.highScoreInput.duration,
       });
 
       const newScore = await postedScore.save();
 
       return { ...newScore._doc, _id: newScore.id };
+    } catch (error) {
+      throw error;
+    }
+  },
+  highScores: async () => {
+    console.log(`\nget highScores: -->`);
+
+    try {
+      return await HighScore.find()
+        .sort({ score: -1 })
+        .then((users) => {
+          return users.map((user) => {
+            return { ...user._doc };
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          throw err;
+        });
     } catch (error) {
       throw error;
     }
