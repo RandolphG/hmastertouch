@@ -5,7 +5,7 @@ import {
   requestSetQuoteAction,
 } from "../../state-mgmt/";
 import { calculateScore, findUniqueLettersInString } from "../../util";
-import { data, gameDetails } from "../../types";
+import { data } from "../../types";
 
 /* environment variables */
 const graphqlUrl = `http://localhost:8000/graphql`;
@@ -48,6 +48,7 @@ export const fetchQuote = (dispatch: any) => {
 /* post highScore info */
 export const postHighScore = async (requestBody: any) => {
   console.log("requestBody -->", requestBody);
+
   await fetch(graphqlUrl!, {
     method: "POST",
     headers: {
@@ -63,7 +64,7 @@ export const postHighScore = async (requestBody: any) => {
       return response.json();
     })
     .then((response) => {
-      console.log(response);
+      console.log(`Returned json()\n`, response);
       return response;
     })
     .catch((err) => {

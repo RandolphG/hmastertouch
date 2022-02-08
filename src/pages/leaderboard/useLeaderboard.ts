@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectSystemState } from "../../state-mgmt";
 
-export const LeaderboardViewModel = () => {
+export const useLeaderboard = () => {
   const { highScores } = useSelector(selectSystemState);
 
   const motionSettings = {

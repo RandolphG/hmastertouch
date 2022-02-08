@@ -25,16 +25,22 @@ const Game: FC = () => {
     <ErrorBoundary>
       <Fragment>
         {gameState === "PLAYING" && (
-          <motion.div className="hang-man-game">
+          <motion.div
+            className="hang-man-game"
+            key={`game`}
+            initial={{ opacity: 0, translateY: -15 }}
+            animate={{ opacity: 1, translateY: 0 }}
+            exit={{ opacity: 0, translateY: -15 }}
+          >
             <div className="dashboard_container_max_info">
               {userName}
               {stats.map((info: any, idx: number) => (
                 <motion.div
                   key={`info-${idx}`}
+                  className={`dashboard_container_max_${info.style}`}
                   initial={{ opacity: 0, translateY: -15 }}
                   animate={{ opacity: 1, translateY: 0 }}
                   transition={{ duration: 0.4, delay: idx * 0.1 }}
-                  className={`dashboard_container_max_${info.style}`}
                 >
                   {info.title} : {info.value}
                 </motion.div>

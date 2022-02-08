@@ -1,6 +1,7 @@
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
+import { postHighScore } from "../../../services";
 import {
   requestAddToFavoritesAction,
   requestResetGameAction,
@@ -30,6 +31,32 @@ export const ModalViewModal = () => {
     animate: { opacity: 1, translateX: 0 },
   };
 
+  const highScoreDetails = {
+    query: `
+          mutation {
+            postScore(input: {
+              userName: "${userName}",
+              id: "${uuid()}",
+              score: "${Number(score)}",
+              quoteId: "${_id}",
+              length: "${length}",
+              uniqueCharacters: "${uniqueCharacters}",
+              mistakes: "${errors}",
+              duration: "${elapsedTime}",
+              }) {
+                userName
+                id
+                score
+                quoteId
+                length
+                uniqueCharacters
+                mistakes
+                duration
+              }
+          }
+        `,
+  };
+
   /* game results to post to server */
   const gameDetails: gameDetails = {
     id: uuid(),
@@ -41,6 +68,12 @@ export const ModalViewModal = () => {
     errors,
     duration: elapsedTime,
   };
+
+  console.log(`\ngameDetails -> `, gameDetails);
+
+  postHighScore(highScoreDetails).then((data: any) => {
+    console.log(`DATA : `, data);
+  });
 
   const newLeaderboard = [...highScores, gameDetails];
 

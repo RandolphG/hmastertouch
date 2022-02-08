@@ -1,16 +1,21 @@
 import React from "react";
-import "./styles/_leaderboardStyles.scss";
 import { motion } from "framer-motion";
-import { LeaderboardViewModel } from "./leaderboardViewModel";
+import { useLeaderboard } from "./useLeaderboard";
+import "./styles/_leaderboardStyles.scss";
 
 /**
  * Leaderboard
  */
 const Leaderboard = () => {
-  const { motionSettings, highScores } = LeaderboardViewModel();
+  const { motionSettings, highScores } = useLeaderboard();
 
   return (
-    <div className="grid-container">
+    <motion.div
+      className="grid-container"
+      initial={{ opacity: 0, translateY: -15 }}
+      animate={{ opacity: 1, translateY: 0 }}
+      exit={{ opacity: 0, translateY: -15 }}
+    >
       <main className="grid-item main">
         <div className="items">
           {highScores.map((score, idx) => (
@@ -88,7 +93,7 @@ const Leaderboard = () => {
           ))}
         </div>
       </main>
-    </div>
+    </motion.div>
   );
 };
 

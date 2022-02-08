@@ -39,18 +39,19 @@ module.exports = {
     }
   },
   postScore: async (score) => {
-    console.log(`\npostScore: -->`);
+    console.log(`\npostScore func: -->\n`);
+    console.log(`\nScore: -->`, score);
 
     try {
       const postedScore = await new HighScore({
-        userName: score.highScoreInput.userName,
-        id: score.highScoreInput.id,
-        score: score.highScoreInput.score,
-        quoteId: score.highScoreInput.quoteId,
-        length: score.highScoreInput.length,
-        uniqueCharacters: score.highScoreInput.uniqueCharacters,
-        mistakes: score.highScoreInput.error,
-        duration: score.highScoreInput.duration,
+        userName: score.input.userName,
+        id: score.input.id,
+        score: score.input.score,
+        quoteId: score.input.quoteId,
+        length: score.input.length,
+        uniqueCharacters: score.input.uniqueCharacters,
+        mistakes: score.input.mistakes,
+        duration: score.input.duration,
       });
 
       const newScore = await postedScore.save();

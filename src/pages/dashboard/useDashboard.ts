@@ -3,15 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { requestResetGameAction, selectSystemState } from "../../state-mgmt";
 import { navigationLinks } from "../../types";
+import { Game } from "../game";
 
 export const useDashboard = () => {
   let navigate = useNavigate();
   const { gameState } = useSelector(selectSystemState);
   const dispatch = useDispatch();
-
-  const navigateTo = useCallback((url: string) => {
-    navigate(url);
-  }, []);
 
   const reset = useCallback(() => {
     dispatch(requestResetGameAction(""));
@@ -20,10 +17,19 @@ export const useDashboard = () => {
 
   const navigationLinks: navigationLinks = [
     { link: `Home`, onClick: reset },
-    { link: `Game`, onClick: () => navigateTo("") },
+    {
+      link: `Game`,
+      onClick: () => {
+        console.log("Game");
+        return 0;
+      },
+    },
     {
       link: `High Scores`,
-      onClick: () => navigateTo("scores"),
+      onClick: () => {
+        console.log("High Scores");
+        return 1;
+      },
     },
   ];
 

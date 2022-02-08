@@ -56,11 +56,11 @@
 
 
 .hang-man-game {
+  border: #f2e968 3px solid;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-
 
   .word-board {
     margin-top: 20px;

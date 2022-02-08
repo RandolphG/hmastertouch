@@ -1,8 +1,7 @@
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchQuote, postHighScore } from "../../services";
-import { v4 as uuid } from "uuid";
+import { fetchQuote } from "../../services";
 import {
   selectSystemState,
   requestIncreaseCorrectAction,
@@ -19,7 +18,7 @@ import {
 } from "../../state-mgmt";
 import { ErrorBoundary } from "../../components";
 import { calculateScore } from "../../util";
-import { gameDetails, handleSelectLetterProps } from "../../types";
+import { handleSelectLetterProps } from "../../types";
 
 export const useGame = () => {
   /*TODO Add share button to*/
@@ -104,51 +103,6 @@ export const useGame = () => {
       );
 
       dispatch(requestSetScore(score));
-
-      const highScoreDetails = {
-        query: `
-          mutation {
-            postScore(input: {
-              userName: "${userName}",
-              id: "${uuid()}",
-              score: "${Number(score)}",
-              quoteId: "${_id}",
-              length: "${length}",
-              uniqueCharacters: "${uniqueCharacters}",
-              mistakes: "${errors}",
-              duration: "${elapsedTime}",
-              }) {
-                userName
-                id
-                score
-                quoteId
-                length
-                uniqueCharacters
-                mistakes
-                duration
-              }
-          }
-        `,
-      };
-
-      /* game results to post to server */
-      const gameDetails: gameDetails = {
-        userName,
-        id: uuid(),
-        score: Number(score),
-        quoteId: _id,
-        length,
-        uniqueCharacters,
-        errors,
-        duration: elapsedTime,
-      };
-
-      console.log(`\ngameDetails -> `, gameDetails);
-
-      postHighScore(highScoreDetails).then((data: any) => {
-        console.log(`DATA : `, data);
-      });
-
       dispatch(requestSetGameStateAction("FINISHED"));
     }
   };
