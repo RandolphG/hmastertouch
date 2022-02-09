@@ -1,17 +1,17 @@
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
-import { postHighScore } from "../../../services";
+import { postHighScore } from "../../services";
 import {
   requestAddToFavoritesAction,
   requestResetGameAction,
   requestSetGameStateAction,
   requestSetHighScores,
   selectSystemState,
-} from "../../../state-mgmt";
-import { results, gameDetails } from "../../../types";
+} from "../../state-mgmt";
+import { results, gameDetails } from "../../types";
 
-export const ModalViewModal = () => {
+export const useResults = () => {
   const {
     highScores,
     userName,
@@ -68,8 +68,6 @@ export const ModalViewModal = () => {
     errors,
     duration: elapsedTime,
   };
-
-  console.log(`\ngameDetails -> `, gameDetails);
 
   postHighScore(highScoreDetails).then((data: any) => {
     console.log(`DATA : `, data);

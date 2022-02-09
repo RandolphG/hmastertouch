@@ -1,8 +1,9 @@
 import React, { Fragment, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { CountdownTimer, Modal } from "../../components";
+import { CountdownTimer } from "../../components";
 import { Game } from "../game";
 import { Leaderboard } from "../leaderboard";
+import { Results } from "../results";
 import { useDashboard } from "./useDashboard";
 import "./styles/_dashboardStyles.scss";
 
@@ -45,7 +46,7 @@ const Dashboard = () => {
   return (
     <Fragment>
       <AnimatePresence exitBeforeEnter>
-        {gameState === "FINISHED" && <Modal />}
+        {gameState === "FINISHED" && <Results />}
         {gameState === "INITIAL" && <CountdownTimer />}
         {gameState === "PLAYING" && (
           <motion.div key={`dashboard`} className="dashboard">

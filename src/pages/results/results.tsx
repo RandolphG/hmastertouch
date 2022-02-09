@@ -1,12 +1,12 @@
-import React, { memo } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { ModalViewModal } from "./modalViewModal";
+import { useResults } from "./useResults";
 import "./styles/_modalStyles.scss";
 
 /**
  * Modal for results
  */
-const Modal = memo(() => {
+const Results = () => {
   const {
     score,
     motionSettings,
@@ -15,7 +15,7 @@ const Modal = memo(() => {
     addToFavorites,
     nextQuote,
     author,
-  } = ModalViewModal();
+  } = useResults();
 
   /* element container */
   const Container = ({ children }: any) => (
@@ -100,6 +100,6 @@ const Modal = memo(() => {
       <Button />
     </Container>
   );
-});
+};
 
-export default Modal;
+export default Results;

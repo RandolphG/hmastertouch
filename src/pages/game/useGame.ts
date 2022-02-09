@@ -24,7 +24,6 @@ export const useGame = () => {
   /*TODO Add share button to*/
   let navigate = useNavigate();
   const {
-    gameState,
     correct,
     guesses,
     selectedLetters,
@@ -81,7 +80,7 @@ export const useGame = () => {
     /* If the letter is inside the quote */
     if (quote.indexOf(letter.toLowerCase()) === -1) {
       dispatch(requestIncreaseErrorsAction(undefined));
-      dispatch(requestAddNotification({ title: `${letter} not found!` }));
+      // dispatch(requestAddNotification({ title: `${letter} not found!` }));
       /* If the letter isn't inside the quote */
     } else if (quote.indexOf(letter.toLowerCase()) !== -1) {
       dispatch(requestIncreaseCorrectAction(undefined));
@@ -93,7 +92,7 @@ export const useGame = () => {
     /* Check if the quote is completed */
     if (matchWholeWord) {
       dispatch(requestStopTimer(undefined));
-      dispatch(requestAddNotification({ title: "Game Complete!" }));
+      // dispatch(requestAddNotification({ title: "Game Complete!" }));
 
       const score = calculateScore(
         length,
@@ -143,7 +142,6 @@ export const useGame = () => {
     newQuote,
     userName,
     stats,
-    gameState,
     handleSelectLetter,
     navigate,
     motionSettings,

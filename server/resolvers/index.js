@@ -1,69 +1,53 @@
 const User = require("../models/users");
 const HighScore = require("../models/highScores");
-const bcrypt = require("bcryptjs");
 
 module.exports = {
-  createUser: async (user) => {
-    console.log(`\ncreatUser: -->`);
+  postScore: async (score) => {
     try {
-      const localUser = user;
-      const hashPassword = await User.findOne({
-        email: user.userInput.email,
-      }).then((user) => {
-        if (user) {
-          throw new Error("User exists already.");
+      const localScore = score;
+      const userNameNotFound = await HighScore.findOne({
+        userName: localScore.input.userName,
+      }).then((score) => {
+        if (score === null) {
+          return true;
         }
 
-        const pw = localUser.userInput.password;
-        return bcrypt
-          .hash(pw, 12)
-          .then((hash) => {
-            return hash;
-          })
-          .catch((err) => {
-            console.log(`\nerror: `, err);
-            throw err;
-          });
+        console.log(`\nscore.score: -->`, score.score);
+        console.log(`\nuserName.input.userName -->`, localScore.input.userName);
+
+        const { score: userScore } = score;
+
+        if (userScore < localScore.input.score) {
+          score.score = localScore.input.score;
+          score.save().then((score) => console.log("Inserted"));
+          return false;
+        }
+        throw new Error("Score is not high.");
       });
 
-      const createdUser = await new User({
-        userName: user.userInput.userName,
-        password: hashPassword,
-      });
+      console.log(`\nuserNameNotFound: -->`, userNameNotFound);
 
-      const newUser = await createdUser.save();
+      if (userNameNotFound) {
+        const postedScore = await new HighScore({
+          userName: score.input.userName,
+          id: score.input.id,
+          score: score.input.score,
+          quoteId: score.input.quoteId,
+          length: score.input.length,
+          uniqueCharacters: score.input.uniqueCharacters,
+          mistakes: score.input.mistakes,
+          duration: score.input.duration,
+        });
 
-      return { ...newUser._doc, _id: newUser.id };
-    } catch (error) {
-      throw error;
-    }
-  },
-  postScore: async (score) => {
-    console.log(`\npostScore func: -->\n`);
-    console.log(`\nScore: -->`, score);
+        const newScore = await postedScore.save();
 
-    try {
-      const postedScore = await new HighScore({
-        userName: score.input.userName,
-        id: score.input.id,
-        score: score.input.score,
-        quoteId: score.input.quoteId,
-        length: score.input.length,
-        uniqueCharacters: score.input.uniqueCharacters,
-        mistakes: score.input.mistakes,
-        duration: score.input.duration,
-      });
-
-      const newScore = await postedScore.save();
-
-      return { ...newScore._doc, _id: newScore.id };
+        return { ...newScore._doc, _id: newScore.id };
+      }
     } catch (error) {
       throw error;
     }
   },
   highScores: async () => {
-    console.log(`\nget highScores: -->`);
-
     try {
       return await HighScore.find()
         .sort({ score: -1 })
