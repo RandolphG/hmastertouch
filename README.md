@@ -2,13 +2,16 @@
 *Interactive guessing game of notable quotes*
 ![INTRO](./public/assets/_preview_00.gif)
 
+
+
+
 ### *Technologies* :
-- [*Framer Motion*](https://framer.com/motion/)
-- [*Hooks*](https://reactjs.org/docs/hooks-intro.html)
-- [*Portal*](https://reactjs.org/docs/portals.html)
-- [*SCSS*](https://sass-lang.com/)
 - [*React Router*](https://reactrouter.com/)
 - [*Redux toolkit*](https://redux-toolkit.js.org/ )
+- [*React Portal*](https://reactjs.org/docs/portals.html)
+- [*Hooks*](https://reactjs.org/docs/hooks-intro.html)
+- [*Framer Motion*](https://framer.com/motion/)
+- [*SCSS*](https://sass-lang.com/)
 
 ### *Installation process* :
 - clone repo

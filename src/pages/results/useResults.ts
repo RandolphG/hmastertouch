@@ -22,6 +22,7 @@ export const useResults = () => {
     timer: { elapsedTime },
     api: { quote, author, _id, uniqueCharacters, length },
   } = useSelector(selectSystemState);
+
   let interval: NodeJS.Timer;
 
   const dispatch = useDispatch();
@@ -87,6 +88,7 @@ export const useResults = () => {
 
   const addToFavorites = useCallback(
     (quote: string) => {
+      console.log(`ADD TO FAVORITES : `, quote);
       dispatch(requestAddToFavoritesAction(quote));
     },
     [dispatch]

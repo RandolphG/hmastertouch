@@ -1,0 +1,15 @@
+{
+  "name": "Remote Schema",
+  "schemaPath": "remote-schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "Hangman": {
+        "url": "http://localhost:8000/graphql",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        },
+        "introspect": true
+      }
+    }
+  }
+}

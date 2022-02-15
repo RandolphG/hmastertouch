@@ -47,8 +47,6 @@ export const fetchQuote = (dispatch: any) => {
 
 /* post highScore info */
 export const postHighScore = async (requestBody: any) => {
-  console.log("requestBody -->", requestBody);
-
   await fetch(graphqlUrl!, {
     method: "POST",
     headers: {
@@ -60,7 +58,7 @@ export const postHighScore = async (requestBody: any) => {
       if (response.status !== 200 && response.status !== 201) {
         throw new Error("Failed");
       }
-      console.log(`response`, response);
+      /* console.log(`response`, response); */
       return response.json();
     })
     .then((response) => {
@@ -101,6 +99,33 @@ export const getHighScores = (dispatch: any) => {
     .catch((error) => {
       dispatch(requestAddNotification({ title: "Error with getting scores" }));
       console.log("Error :", error);
+    });
+};
+
+/* get scored from mongodb */
+export const getScores = (requestBody: any) => {
+  return fetch(graphqlUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(requestBody),
+  })
+    .then((response) => {
+      if (response.status !== 200 && response.status !== 201) {
+        console.log(`\nFailure!`, response);
+        throw new Error("Failed");
+      }
+      console.log(`\nSuccess!`, response);
+      return response.json();
+    })
+    .then(({ data }) => {
+      const { login } = data;
+      console.log(`\nlogin`, login);
+    })
+    .catch((err) => {
+      console.log(`\nError Signing In!`, err);
+      return err;
     });
 };
 

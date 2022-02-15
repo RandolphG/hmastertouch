@@ -1,13 +1,20 @@
-import { useCallback } from "react";
+import { useQuery } from "@apollo/client";
+import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { requestResetGameAction, selectSystemState } from "../../state-mgmt";
+import { HIGH_SCORES } from "../../client";
+import {
+  requestResetGameAction,
+  requestSetHighScores,
+  selectSystemState,
+} from "../../state-mgmt";
 import { navigationLinks } from "../../types";
 import { Game } from "../game";
 
 export const useDashboard = () => {
   let navigate = useNavigate();
   const { gameState } = useSelector(selectSystemState);
+  const { loading, error, data } = useQuery(HIGH_SCORES);
   const dispatch = useDispatch();
 
   const reset = useCallback(() => {
@@ -32,6 +39,16 @@ export const useDashboard = () => {
       },
     },
   ];
+
+  useEffect(() => {
+    if (data) {
+      const { highScores } = data;
+
+      console.log(`%cHIGH SCORES --->`, "color : green;", highScores);
+
+      dispatch(requestSetHighScores(highScores));
+    }
+  }, [data]);
 
   return {
     navigate,

@@ -41,6 +41,5 @@ export const useLeaderboard = () => {
       slider.scrollLeft = scrollLeft - walk;
     });
   });
-  console.log(`SCORE --->`, highScores);
   return { motionSettings, highScores };
 };

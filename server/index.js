@@ -9,15 +9,16 @@ const isAuth = require("./middleware/isAuth");
 const app = express();
 const host = "0.0.0.0";
 const port = process.env.PORT || 8000;
+/*TODO resolve this mongodb uri */
 const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.f466e.gcp.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`;
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
 
-require("dotenv").config();
-
 app.use(cors());
+
+require("dotenv").config();
 
 app.use(express.json());
 

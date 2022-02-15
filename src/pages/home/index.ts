@@ -1,3 +1,3 @@
 export { default as Home } from "./home";
-export * from "./homeViewModel";
+export * from "./useHome";
 export { default as Message } from "./message";

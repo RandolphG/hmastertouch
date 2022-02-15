@@ -10,3 +10,12 @@
     if a component is using state it is called a container
 5. take index utilities and separate into other files names  for what they do
 6. read articles about what should be in redux or not
+
+
+GraphQL
+    https://betterprogramming.pub/full-stack-react-graphql-mongodb-apollo-building-an-app-cb1eb647c73a
+    https://javascript.plainenglish.io/create-a-todo-app-with-graphql-react-mongodb-and-apollo-server-side-292ce42b9eea
+    https://docs.mongodb.com/realm/web/graphql-apollo-react/
+    https://betterprogramming.pub/7-things-every-react-project-should-start-with-21f7570a7a4b
+    https://betterprogramming.pub/fetching-data-from-a-graphql-api-in-react-ad003edc4e7b
+    https://www.freecodecamp.org/news/5-ways-to-fetch-data-react-graphql/

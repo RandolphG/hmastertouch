@@ -2,14 +2,14 @@ import React, { FC } from "react";
 import { Outlet } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { FloatingLogo } from "../../components";
-import { HomeViewModel } from "./homeViewModel";
+import { useHome } from "./useHome";
 import "./styles/_homeStyles.scss";
 
 /**
  * Home
  */
 const Home: FC = () => {
-  const { buttonOptions, buttonId, motionSettings } = HomeViewModel();
+  const { buttonOptions, buttonId, motionSettings } = useHome();
 
   const button = buttonOptions.map((buttonOption, index) =>
     buttonId === buttonOption.id ? (
@@ -26,7 +26,7 @@ const Home: FC = () => {
   const Button = () => (
     <div className="home_container_max_buttons">{button} </div>
   );
-
+  /*TODO add tracker pop uo to the bottom of UI */
   return (
     <motion.div className="home" key="home">
       <motion.div className="home_container" {...motionSettings}>
