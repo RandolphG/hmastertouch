@@ -17,9 +17,11 @@ module.exports = {
 
         const { score: userScore } = score;
 
-        if (userScore < localScore.input.score) {
+        const isHighScore = ()=> userScore < localScore.input.score
+
+        if (isHighScore()) {
           score.score = localScore.input.score;
-          score.save().then((score) => console.log("Inserted"));
+          score.save().then(() => console.log("Inserted"));
           return false;
         }
         throw new Error("Score is not high.");
@@ -44,6 +46,7 @@ module.exports = {
         return { ...newScore._doc, _id: newScore.id };
       }
     } catch (error) {
+      console.err(error);
       throw error;
     }
   },
@@ -61,6 +64,7 @@ module.exports = {
           throw err;
         });
     } catch (error) {
+      console.error(error)
       throw error;
     }
   },
@@ -72,7 +76,7 @@ module.exports = {
         });
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         throw err;
       });
   },

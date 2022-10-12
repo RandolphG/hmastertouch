@@ -24,6 +24,9 @@ export type ReactNode =
 /* DASHBOARD */
 export type navigationLinks = link[];
 
+export type stats ={title: string, value: number, style: string}[]
+
+
 export type link = {
   link: string;
   onClick: () => number | void;

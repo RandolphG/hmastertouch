@@ -18,7 +18,7 @@ import {
 } from "../../state-mgmt";
 import { ErrorBoundary } from "../../components";
 import { calculateScore } from "../../util";
-import { handleSelectLetterProps } from "../../types";
+import { handleSelectLetterProps, stats } from "../../types";
 
 export const useGame = () => {
   /*TODO Add share button to*/
@@ -69,7 +69,7 @@ export const useGame = () => {
     transition: { duration: 0.3, delay: 1.3 },
   };
 
-  const stats: any = [
+  const stats:stats = [
     { title: `Correct`, value: correct, style: "userName" },
     { title: `Guesses`, value: guesses, style: "userName" },
     { title: `Errors`, value: errors, style: "errors" },
@@ -117,7 +117,8 @@ export const useGame = () => {
 
       handleLetterInQuoteCheck(letter);
 
-      /* compare selected letter against unique letters*/ uniqueCharacters
+      /* compare selected letter against unique letters*/
+      uniqueCharacters
         .split("")
         .forEach((letter) => {
           if (allSelectedLetters.indexOf(letter.toUpperCase()) === -1) {
